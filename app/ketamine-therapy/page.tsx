@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Ketamine Therapy in Irvine, CA | Evidence-Based Infusion Treatment',
-  description: 'Learn how ketamine therapy works for depression, anxiety, PTSD, and chronic stress. Physician-led IV ketamine infusions in North Irvine, CA with hospital-level safety standards.',
+  title: 'Ketamine Therapy in Newport Beach, CA | Evidence-Based Infusion Treatment',
+  description: 'Learn how ketamine therapy works for depression, anxiety, PTSD, and chronic stress. Physician-led IV ketamine infusions in Newport Beach, CA with hospital-level safety standards.',
 };
 
 export default function KetamineTherapyPage() {
@@ -13,10 +13,10 @@ export default function KetamineTherapyPage() {
       <section className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto text-center">
           <h1 className="text-4xl sm:text-5xl font-bold mb-6">
-            Ketamine Therapy in Irvine, CA
+            Ketamine Therapy in Newport Beach, CA
           </h1>
           <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-            Evidence-based IV ketamine infusion treatment for depression, anxiety, PTSD, and chronic stress — provided by a board-certified emergency physician in North Irvine.
+            Evidence-based IV ketamine infusion treatment for depression, anxiety, PTSD, and chronic stress — provided by a board-certified emergency physician in Newport Beach.
           </p>
         </div>
       </section>
@@ -56,7 +56,7 @@ export default function KetamineTherapyPage() {
               </div>
               <h3 className="text-xl font-semibold text-slate-900 mb-3">Medical Screening</h3>
               <p className="text-slate-600 leading-relaxed">
-                Before your first infusion, you&apos;ll meet with the physician for a comprehensive evaluation of your medical history, current medications, mental health history, and treatment goals. Not everyone is a candidate for ketamine therapy, and we&apos;ll make sure it&apos;s safe and appropriate for you.
+                Before your first infusion, you'll meet with the physician for a comprehensive evaluation of your medical history, current medications, mental health history, and treatment goals. Not everyone is a candidate for ketamine therapy, and we'll make sure it's safe and appropriate for you.
               </p>
             </div>
 
@@ -66,7 +66,7 @@ export default function KetamineTherapyPage() {
               </div>
               <h3 className="text-xl font-semibold text-slate-900 mb-3">The Infusion Session</h3>
               <p className="text-slate-600 leading-relaxed">
-                On treatment day, you&apos;ll relax in a private room with comfortable seating, soft lighting, and a calm atmosphere. A small IV will be placed, and ketamine will be administered slowly over 40–60 minutes. You&apos;ll be monitored continuously (blood pressure, heart rate, oxygen levels) throughout the session.
+                On treatment day, you'll relax in a private room with comfortable seating, soft lighting, and a calm atmosphere. A small IV will be placed, and ketamine will be administered slowly over 40–60 minutes. You'll be monitored continuously (blood pressure, heart rate, oxygen levels) throughout the session.
               </p>
             </div>
 
@@ -86,7 +86,7 @@ export default function KetamineTherapyPage() {
               </div>
               <h3 className="text-xl font-semibold text-slate-900 mb-3">Recovery & Discharge</h3>
               <p className="text-slate-600 leading-relaxed">
-                After the infusion, you&apos;ll rest for 15–30 minutes while the effects wear off. You&apos;ll need someone to drive you home, as you should not drive for the rest of the day. Most people can return to normal activities the next day.
+                After the infusion, you'll rest for 15–30 minutes while the effects wear off. You'll need someone to drive you home, as you should not drive for the rest of the day. Most people can return to normal activities the next day.
               </p>
             </div>
           </div>
@@ -101,7 +101,7 @@ export default function KetamineTherapyPage() {
           </h2>
           
           <p className="text-lg text-slate-600 text-center max-w-3xl mx-auto mb-12">
-            Research and clinical experience suggest that ketamine therapy can be beneficial for several mental health and chronic pain conditions, especially when traditional treatments haven&apos;t worked.
+            Research and clinical experience suggest that ketamine therapy can be beneficial for several mental health and chronic pain conditions, especially when traditional treatments haven't worked.
           </p>
 
           <div className="grid md:grid-cols-2 gap-8 mb-10">
@@ -143,7 +143,7 @@ export default function KetamineTherapyPage() {
 
           <div className="bg-amber-50 border border-amber-200 rounded-xl p-6 lg:p-8">
             <p className="text-slate-700 text-lg leading-relaxed">
-              <strong className="text-slate-900">Important:</strong> Individual results vary, and ketamine therapy is not appropriate for everyone. During your initial evaluation, we&apos;ll discuss whether you&apos;re a good candidate based on your medical history, current medications, and treatment goals.
+              <strong className="text-slate-900">Important:</strong> Individual results vary, and ketamine therapy is not appropriate for everyone. During your initial evaluation, we'll discuss whether you're a good candidate based on your medical history, current medications, and treatment goals.
             </p>
           </div>
         </div>
@@ -161,7 +161,7 @@ export default function KetamineTherapyPage() {
               Ketamine is a powerful medication with a strong safety record — when administered correctly. However, not all ketamine providers have the same level of training, experience, or oversight.
             </p>
             <p className="text-slate-700 text-lg leading-relaxed mb-6">
-              At Haven Ketamine in Irvine, every patient is evaluated and treated directly by a board-certified emergency physician with years of experience using ketamine in high-acuity settings. This means:
+              At Haven Ketamine in Newport Beach, every patient is evaluated and treated directly by a board-certified emergency physician with years of experience using ketamine in high-acuity settings. This means:
             </p>
           </div>
 
@@ -225,7 +225,7 @@ export default function KetamineTherapyPage() {
             <div className="mb-8">
               <h3 className="text-xl font-semibold text-slate-900 mb-3">Maintenance Phase (Optional)</h3>
               <p className="text-slate-700 leading-relaxed mb-4">
-                After the initial series, some patients feel fully better and don&apos;t need further treatment. Others benefit from occasional &quot;booster&quot; infusions every few weeks or months to maintain symptom relief. Your physician will work with you to find the right schedule based on how you respond.
+                After the initial series, some patients feel fully better and don't need further treatment. Others benefit from occasional "booster" infusions every few weeks or months to maintain symptom relief. Your physician will work with you to find the right schedule based on how you respond.
               </p>
               <p className="text-slate-600 text-sm italic">
                 Example: One infusion every 4–6 weeks as needed.
@@ -235,7 +235,7 @@ export default function KetamineTherapyPage() {
             <div>
               <h3 className="text-xl font-semibold text-slate-900 mb-3">Integration & Support</h3>
               <p className="text-slate-700 leading-relaxed">
-                Ketamine works best when combined with therapy, lifestyle changes, and ongoing mental health support. We strongly encourage working with a therapist or psychiatrist alongside ketamine treatment, and we&apos;ll help coordinate care whenever possible.
+                Ketamine works best when combined with therapy, lifestyle changes, and ongoing mental health support. We strongly encourage working with a therapist or psychiatrist alongside ketamine treatment, and we'll help coordinate care whenever possible.
               </p>
             </div>
           </div>
@@ -264,7 +264,7 @@ export default function KetamineTherapyPage() {
                 <svg className="w-5 h-5 text-slate-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
                 </svg>
-                <span>Haven Ketamine is not an emergency or crisis service. If you&apos;re in immediate danger, call 988 or visit your nearest emergency department.</span>
+                <span>Haven Ketamine is not an emergency or crisis service. If you're in immediate danger, call 988 or visit your nearest emergency department.
               </li>
               <li className="flex items-start gap-3">
                 <svg className="w-5 h-5 text-slate-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">

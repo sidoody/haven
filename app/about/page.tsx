@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'About Haven Ketamine | Physician-Led Ketamine Therapy in Irvine, CA',
-  description: 'Learn about Haven Ketamine\'s physician-led approach to ketamine therapy in North Irvine. Board-certified emergency physician providing evidence-based treatment for depression, anxiety, and PTSD.',
+  title: 'About Haven Ketamine | Physician-Led Ketamine Therapy in Newport Beach, CA',
+  description: 'Learn about Haven Ketamine\'s physician-led approach to ketamine therapy in Newport Beach. Board-certified emergency physician providing evidence-based treatment for depression, anxiety, and PTSD.',
 };
 
 export default function AboutPage() {
@@ -16,7 +16,7 @@ export default function AboutPage() {
             About Haven Ketamine
           </h1>
           <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-            A physician-led ketamine therapy clinic bringing hospital-level safety and evidence-based care to a calm, boutique environment in North Irvine.
+            A physician-led ketamine therapy clinic bringing hospital-level safety and evidence-based care to a calm, boutique environment in Newport Beach.
           </p>
         </div>
       </section>
@@ -31,16 +31,16 @@ export default function AboutPage() {
           <div className="prose prose-lg max-w-none">
             <div className="bg-white rounded-2xl p-8 lg:p-10 border border-slate-200 shadow-sm mb-8">
               <p className="text-slate-700 text-lg leading-relaxed mb-6">
-                Haven Ketamine was created out of a simple realization: the people who need mental health support the most are often the ones who&apos;ve already tried everything. They&apos;ve been to therapy. They&apos;ve taken multiple medications. They&apos;ve changed their diet, started exercising, practiced mindfulness — and they&apos;re still suffering.
+                Haven Ketamine was created out of a simple realization: the people who need mental health support the most are often the ones who've already tried everything. They've been to therapy. They've taken multiple medications. They've changed their diet, started exercising, practiced mindfulness — and they're still suffering.
               </p>
               <p className="text-slate-700 text-lg leading-relaxed mb-6">
-                As an emergency physician, I&apos;ve seen firsthand how ketamine can rapidly stabilize patients in crisis. I&apos;ve also seen how limited our traditional treatment options can be for depression, anxiety, PTSD, and chronic stress. When conventional approaches fail, patients are left feeling hopeless and out of options.
+                As an emergency physician, I've seen firsthand how ketamine can rapidly stabilize patients in crisis. I've also seen how limited our traditional treatment options can be for depression, anxiety, PTSD, and chronic stress. When conventional approaches fail, patients are left feeling hopeless and out of options.
               </p>
               <p className="text-slate-700 text-lg leading-relaxed mb-6">
                 But ketamine therapy offered a different path — one backed by decades of research and real-world evidence. The challenge was that most ketamine clinics operated like quick-service IV bars or impersonal medical mills. I wanted to create something different: a place that combined the rigorous safety standards of emergency medicine with the calm, supportive environment patients deserve.
               </p>
               <p className="text-slate-700 text-lg leading-relaxed">
-                That&apos;s how Haven was born. A small, physician-led clinic designed for people in Irvine and Orange County who are ready to try something evidence-based, powerful, and different — without compromising on safety or personal care.
+                That's how Haven was born. A small, physician-led clinic designed for people in Newport Beach and Orange County who are ready to try something evidence-based, powerful, and different — without compromising on safety or personal care.
               </p>
             </div>
           </div>
@@ -59,7 +59,7 @@ export default function AboutPage() {
               Dr. [Your Name] is a board-certified emergency medicine physician with extensive experience in acute care, procedural sedation, and managing complex medical situations. He completed [medical school] and [residency program], and has practiced emergency medicine for [X] years.
             </p>
             <p className="text-slate-700 text-lg leading-relaxed mb-6">
-              Throughout his career in emergency medicine, Dr. [Last Name] has safely administered ketamine hundreds of times for everything from pain management to procedural sedation. This deep familiarity with the medication&apos;s effects, dosing, and safety profile made him uniquely qualified to offer ketamine therapy for mental health conditions.
+              Throughout his career in emergency medicine, Dr. [Last Name] has safely administered ketamine hundreds of times for everything from pain management to procedural sedation. This deep familiarity with the medication's effects, dosing, and safety profile made him uniquely qualified to offer ketamine therapy for mental health conditions.
             </p>
             <p className="text-slate-700 text-lg leading-relaxed">
               After witnessing too many patients struggle despite &quot;doing everything right,&quot; Dr. [Last Name] founded Haven Ketamine to provide a different kind of treatment option — one that combines cutting-edge research with compassionate, individualized care.
@@ -76,8 +76,7 @@ export default function AboutPage() {
               </h3>
               <ul className="space-y-2 text-slate-700">
                 <li>• Board-certified in Emergency Medicine (ABEM)</li>
-                <li>• California medical license (Active)</li>
-                <li>• DEA registration (Schedule III)</li>
+                <li>• California medical license</li>
                 <li>• [Medical School Name]</li>
                 <li>• [Residency Program Name]</li>
               </ul>
@@ -163,7 +162,7 @@ export default function AboutPage() {
               At Haven, every patient is evaluated and treated directly by a board-certified emergency physician — someone who has managed thousands of critically ill patients, performed hundreds of ketamine administrations, and knows how to respond immediately if anything unexpected happens.
             </p>
             <p className="text-slate-700 text-lg leading-relaxed">
-              This isn&apos;t about ego or credentials for their own sake. It&apos;s about making sure you receive the safest, most effective care possible. Ketamine is a powerful tool when used correctly, and at Haven, it always is.
+              This isn't about ego or credentials for their own sake. It's about making sure you receive the safest, most effective care possible. Ketamine is a powerful tool when used correctly, and at Haven, it always is.
             </p>
           </div>
         </div>

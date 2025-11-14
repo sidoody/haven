@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import WaitlistForm from '../components/WaitlistForm';
 
 export const metadata: Metadata = {
-  title: 'Contact Haven Ketamine | Join the Waitlist in Irvine, CA',
-  description: 'Contact Haven Ketamine in North Irvine, CA. Join our waitlist for early access to physician-led ketamine therapy for depression, anxiety, PTSD, and chronic stress.',
+  title: 'Contact Haven Ketamine | Join the Waitlist in Newport Beach, CA',
+  description: 'Contact Haven Ketamine in Newport Beach, CA. Join our waitlist for early access to physician-led ketamine therapy for depression, anxiety, PTSD, and chronic stress.',
 };
 
 export default function ContactPage() {
@@ -16,7 +16,7 @@ export default function ContactPage() {
             Contact Haven Ketamine
           </h1>
           <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-            Get in touch to learn more about our physician-led ketamine therapy in North Irvine, CA
+            Get in touch to learn more about our physician-led ketamine therapy in Newport Beach, CA
           </p>
         </div>
       </section>
@@ -43,11 +43,11 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-semibold text-slate-900 mb-1">Location</h3>
                     <p className="text-slate-600">
-                      North Irvine, CA<br />
+                      Newport Beach, CA<br />
                       <span className="text-sm text-slate-500">(Exact address coming soon)</span>
                     </p>
                     <p className="text-sm text-slate-500 mt-2">
-                      Convenient to Orchard Hills, Northpark, Stonegate, Woodbury, Cypress Village, Eastwood, Portola Springs, and surrounding areas
+                      Convenient to Corona del Mar, Balboa Island, Lido Isle, Dover Shores, and surrounding areas
                     </p>
                   </div>
                 </div>
@@ -107,7 +107,7 @@ export default function ContactPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
                   </svg>
                   <p className="font-medium">Map coming soon</p>
-                  <p className="text-sm">North Irvine location</p>
+                  <p className="text-sm">Newport Beach location</p>
                 </div>
               </div>
             </div>
@@ -120,7 +120,7 @@ export default function ContactPage() {
               
               <div className="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm">
                 <p className="text-slate-600 mb-6">
-                  We&apos;re finalizing our space in North Irvine and will be opening soon. Join the waitlist to get early access to appointments, opening-week pricing, or schedule a free 10-minute call with the physician.
+                  We're finalizing our space in Newport Beach and will be opening soon. Join the waitlist to get early access to appointments, opening-week pricing, or schedule a free 10-minute call with the physician.
                 </p>
                 <WaitlistForm />
               </div>
@@ -128,7 +128,7 @@ export default function ContactPage() {
               {/* Additional Info */}
               <div className="mt-8 bg-amber-50 border border-amber-200 rounded-xl p-6">
                 <p className="text-sm text-slate-700">
-                  <strong className="text-slate-900">Crisis Resources:</strong> Haven Ketamine is not an emergency or crisis service. If you&apos;re in immediate danger or having thoughts of self-harm, please call 988 (Suicide & Crisis Lifeline) or visit your nearest emergency department.
+                  <strong className="text-slate-900">Crisis Resources:</strong> Haven Ketamine is not an emergency or crisis service. If you're in immediate danger or having thoughts of self-harm, please call 988 (Suicide & Crisis Lifeline) or visit your nearest emergency department.
                 </p>
               </div>
             </div>

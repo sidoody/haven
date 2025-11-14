@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Ketamine Treatment Pricing | Haven Ketamine Irvine, CA',
-  description: 'Transparent, cash-based pricing for physician-led ketamine therapy in Irvine. HSA/FSA accepted. Out-of-network insurance documentation available.',
+  title: 'Ketamine Treatment Pricing | Haven Ketamine Newport Beach, CA',
+  description: 'Transparent, cash-based pricing for physician-led ketamine therapy in Newport Beach. HSA/FSA accepted. Out-of-network insurance documentation available.',
 };
 
 export default function PricingPage() {
@@ -25,7 +25,7 @@ export default function PricingPage() {
       <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-8 text-center">
-            Why We&apos;re Cash-Based
+            Why We're Cash-Based
           </h2>
           
           <div className="bg-white rounded-2xl p-8 lg:p-10 border border-slate-200 shadow-sm mb-8">

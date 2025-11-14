@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Ketamine Therapy FAQ | Haven Ketamine Irvine',
-  description: 'Common questions about ketamine therapy in Irvine, CA. Learn about safety, candidacy, treatment experience, insurance, and what to expect from physician-led ketamine infusions.',
+  title: 'Ketamine Therapy FAQ | Haven Ketamine Newport Beach',
+  description: 'Common questions about ketamine therapy in Newport Beach, CA. Learn about safety, candidacy, treatment experience, insurance, and what to expect from physician-led ketamine infusions.',
 };
 
 const faqs = [
@@ -110,7 +110,7 @@ export default function FAQPage() {
             Ketamine Therapy FAQ
           </h1>
           <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-            Common questions about ketamine therapy at Haven Ketamine in Irvine, CA
+            Common questions about ketamine therapy at Haven Ketamine in Newport Beach, CA
           </p>
         </div>
       </section>
@@ -141,7 +141,7 @@ export default function FAQPage() {
             Still Have Questions?
           </h2>
           <p className="text-lg text-slate-600 mb-8 max-w-2xl mx-auto">
-            We&apos;re here to help. Join our waitlist to schedule a free 10-minute call with Dr. [Last Name], or send us a message through our contact form.
+            We're here to help. Join our waitlist to schedule a free 10-minute call with Dr. [Last Name], or send us a message through our contact form.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
