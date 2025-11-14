@@ -1,10 +1,26 @@
+'use client';
+
 import Link from 'next/link';
 
 export default function Footer() {
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const headerOffset = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
     <footer className="bg-stone-900 text-sand-200 relative overflow-hidden">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           {/* Brand */}
           <div className="md:col-span-1">
             <h3 className="text-white font-serif font-medium text-xl mb-3 tracking-wide">Haven</h3>
@@ -15,44 +31,47 @@ export default function Footer() {
 
           {/* Main Pages */}
           <div>
-            <h4 className="text-sand-100 font-medium mb-4 text-sm uppercase tracking-wide">Learn More</h4>
+            <h4 className="text-sand-100 font-medium mb-4 text-sm uppercase tracking-wide">Quick Links</h4>
             <ul className="space-y-3 text-sm">
               <li>
-                <Link href="/about" className="text-sand-300 hover:text-sand-100 transition-colors font-light">
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link href="/ketamine-therapy" className="text-sand-300 hover:text-sand-100 transition-colors font-light">
+                <button 
+                  onClick={() => scrollToSection('therapy')}
+                  className="text-sand-300 hover:text-sand-100 transition-colors font-light text-left"
+                >
                   Ketamine Therapy
-                </Link>
+                </button>
               </li>
               <li>
-                <Link href="/pricing" className="text-sand-300 hover:text-sand-100 transition-colors font-light">
+                <button 
+                  onClick={() => scrollToSection('pricing')}
+                  className="text-sand-300 hover:text-sand-100 transition-colors font-light text-left"
+                >
                   Pricing
-                </Link>
+                </button>
               </li>
               <li>
-                <Link href="/faq" className="text-sand-300 hover:text-sand-100 transition-colors font-light">
+                <button 
+                  onClick={() => scrollToSection('about')}
+                  className="text-sand-300 hover:text-sand-100 transition-colors font-light text-left"
+                >
+                  About Us
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => scrollToSection('faq')}
+                  className="text-sand-300 hover:text-sand-100 transition-colors font-light text-left"
+                >
                   FAQ
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Get Started */}
-          <div>
-            <h4 className="text-sand-100 font-medium mb-4 text-sm uppercase tracking-wide">Get Started</h4>
-            <ul className="space-y-3 text-sm">
-              <li>
-                <Link href="/#waitlist" className="text-sand-300 hover:text-sand-100 transition-colors font-light">
-                  Join Waitlist
-                </Link>
+                </button>
               </li>
               <li>
-                <Link href="/contact" className="text-sand-300 hover:text-sand-100 transition-colors font-light">
-                  Contact Us
-                </Link>
+                <button 
+                  onClick={() => scrollToSection('contact')}
+                  className="text-sand-300 hover:text-sand-100 transition-colors font-light text-left"
+                >
+                  Contact
+                </button>
               </li>
             </ul>
           </div>

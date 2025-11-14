@@ -7,6 +7,7 @@
   --sand-200: #E1D9C9;
   --sand-300: #D2C5B5;
   --clay-300: #B18A72;
+  --clay-500: #9B7055;
   --terracotta-400: #A06A55;
   --brown-700: #4A3B32;
   --stone-900: #2E2A26;
@@ -22,6 +23,7 @@
   --color-sand-200: var(--sand-200);
   --color-sand-300: var(--sand-300);
   --color-clay-300: var(--clay-300);
+  --color-clay-500: var(--clay-500);
   --color-terracotta-400: var(--terracotta-400);
   --color-brown-700: var(--brown-700);
   --color-stone-900: var(--stone-900);
