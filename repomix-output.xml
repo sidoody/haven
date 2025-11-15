@@ -41,20 +41,11 @@ The content is organized as follows:
 
 <directory_structure>
 app/
-  about/
-    page.tsx
   components/
     Footer.tsx
     Header.tsx
+    HeroEmailSignup.tsx
     WaitlistForm.tsx
-  contact/
-    page.tsx
-  faq/
-    page.tsx
-  ketamine-therapy/
-    page.tsx
-  pricing/
-    page.tsx
   privacy-policy/
     page.tsx
   terms/
@@ -82,6 +73,38 @@ tsconfig.json
 
 <files>
 This section contains the contents of the repository's files.
+
+<file path="app/components/HeroEmailSignup.tsx">
+'use client';
+
+export default function HeroEmailSignup() {
+  const scrollToContact = () => {
+    const element = document.getElementById('contact');
+    if (element) {
+      const headerOffset = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+    }
+  };
+
+  return (
+    <div className="flex flex-col sm:flex-row gap-3 mb-8 max-w-xl">
+      <input
+        type="email"
+        placeholder="Enter your email"
+        className="flex-1 px-5 py-3.5 rounded-full border border-sand-300 bg-white/90 backdrop-blur-sm focus:ring-2 focus:ring-clay-300 focus:border-clay-300 outline-none transition font-light text-stone-900 placeholder:text-brown-700/50 shadow-soft"
+      />
+      <button
+        onClick={scrollToContact}
+        className="btn-primary whitespace-nowrap cursor-pointer"
+      >
+        Join Waitlist
+      </button>
+    </div>
+  );
+}
+</file>
 
 <file path="app/privacy-policy/page.tsx">
 import type { Metadata } from 'next';
@@ -958,6 +981,7 @@ export default nextConfig;
     "lint": "eslint"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.81.1",
     "next": "16.0.3",
     "react": "19.2.0",
     "react-dom": "19.2.0"
@@ -1390,415 +1414,6 @@ Once launched, monitor:
 }
 </file>
 
-<file path="app/about/page.tsx">
-import type { Metadata } from 'next';
-import Link from 'next/link';
-
-export const metadata: Metadata = {
-  title: 'About Haven Ketamine | Physician-Led Ketamine Therapy in Newport Beach, CA',
-  description: 'Learn about Haven Ketamine\'s physician-led approach to ketamine therapy in Newport Beach. Board-certified emergency physician providing evidence-based treatment for depression, anxiety, and PTSD.',
-};
-
-export default function AboutPage() {
-  return (
-    <>
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-5xl mx-auto text-center">
-          <h1 className="text-4xl sm:text-5xl font-bold mb-6">
-            About Haven Ketamine
-          </h1>
-          <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-            A physician-led ketamine therapy clinic bringing hospital-level safety and evidence-based care to a calm, boutique environment in Newport Beach.
-          </p>
-        </div>
-      </section>
-
-      {/* Our Story Section */}
-      <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-8 text-center">
-            Our Story
-          </h2>
-          
-          <div className="prose prose-lg max-w-none">
-            <div className="bg-white rounded-2xl p-8 lg:p-10 border border-slate-200 shadow-sm mb-8">
-              <p className="text-slate-700 text-lg leading-relaxed mb-6">
-                Haven Ketamine was created out of a simple realization: the people who need mental health support the most are often the ones who've already tried everything. They've been to therapy. They've taken multiple medications. They've changed their diet, started exercising, practiced mindfulness — and they're still suffering.
-              </p>
-              <p className="text-slate-700 text-lg leading-relaxed mb-6">
-                As an emergency physician, I've seen firsthand how ketamine can rapidly stabilize patients in crisis. I've also seen how limited our traditional treatment options can be for depression, anxiety, PTSD, and chronic stress. When conventional approaches fail, patients are left feeling hopeless and out of options.
-              </p>
-              <p className="text-slate-700 text-lg leading-relaxed mb-6">
-                But ketamine therapy offered a different path — one backed by decades of research and real-world evidence. The challenge was that most ketamine clinics operated like quick-service IV bars or impersonal medical mills. I wanted to create something different: a place that combined the rigorous safety standards of emergency medicine with the calm, supportive environment patients deserve.
-              </p>
-              <p className="text-slate-700 text-lg leading-relaxed">
-                That's how Haven was born. A small, physician-led clinic designed for people in Newport Beach and Orange County who are ready to try something evidence-based, powerful, and different — without compromising on safety or personal care.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Meet the Physician Section */}
-      <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-white">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-8 text-center">
-            Meet Dr. Saud Siddiqui
-          </h2>
-          
-          <div className="bg-slate-50 rounded-2xl p-8 lg:p-10 border border-slate-200 mb-8">
-            <p className="text-slate-700 text-lg leading-relaxed mb-6">
-              Dr. Saud Siddiqui is a board-certified emergency medicine physician with extensive experience caring for patients in high-acuity settings and safely using ketamine for procedural sedation. He completed his medical training at UC Irvine and The George Washington University Hospital, a busy Level I trauma center in Washington, D.C., before practicing emergency medicine in Los Angeles.
-            </p>
-            <p className="text-slate-700 text-lg leading-relaxed mb-6">
-              Throughout his career in emergency medicine, Dr. Siddiqui has safely administered ketamine hundreds of times for everything from pain management to procedural sedation. This deep familiarity with the medication's effects, dosing, and safety profile made him uniquely qualified to offer ketamine therapy for mental health conditions.
-            </p>
-            <p className="text-slate-700 text-lg leading-relaxed">
-              After years in acute care and medical education, Dr. Siddiqui saw how many people continued to struggle despite traditional treatments. He created Haven as a calm, physician-led space where patients can access evidence-based ketamine therapy with hospital-level safety and a boutique, private experience. Education is central to his approach—every patient receives clear guidance, thoughtful conversation, and personalized care.
-            </p>
-          </div>
-
-          <div className="grid sm:grid-cols-2 gap-6">
-            <div className="bg-white rounded-xl p-6 border border-slate-200 shadow-sm">
-              <h3 className="font-semibold text-slate-900 mb-3 flex items-center gap-2">
-                <svg className="w-5 h-5 text-sky-500" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                Credentials
-              </h3>
-              <ul className="space-y-2 text-slate-700">
-                <li>• Board-certified in Emergency Medicine (ABEM)</li>
-                <li>• Fully licensed physician in California</li>
-                <li>• UC Irvine School of Medicine</li>
-                <li>• The George Washington University Hospital (Residency)</li>
-              </ul>
-            </div>
-
-            <div className="bg-white rounded-xl p-6 border border-slate-200 shadow-sm">
-              <h3 className="font-semibold text-slate-900 mb-3 flex items-center gap-2">
-                <svg className="w-5 h-5 text-sky-500" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                Expertise
-              </h3>
-              <ul className="space-y-2 text-slate-700">
-                <li>• Acute care & emergency medicine</li>
-                <li>• Procedural sedation</li>
-                <li>• Ketamine administration & safety</li>
-                <li>• Medical education</li>
-                <li>• Evidence-based medicine</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Our Values Section */}
-      <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-12 text-center">
-            Our Values
-          </h2>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            {[
-              {
-                title: 'Safety First, Always',
-                description: 'Every decision we make starts with safety. From screening to monitoring to follow-up care, we maintain the same rigorous standards you\'d expect in a hospital setting — because ketamine is a powerful medication that demands respect.',
-              },
-              {
-                title: 'Compassionate, Judgment-Free Care',
-                description: 'Mental health struggles are hard enough without stigma or judgment. At Haven, you\'ll be treated with empathy, dignity, and respect — no matter where you are in your journey.',
-              },
-              {
-                title: 'Transparency in Everything',
-                description: 'From pricing to treatment plans to potential risks and benefits, we believe in honest, clear communication. You\'ll never be pressured, upsold, or kept in the dark about your care.',
-              },
-              {
-                title: 'Evidence-Based Medicine',
-                description: 'We follow the science, not the hype. Our protocols are based on current research, clinical guidelines, and years of real-world experience using ketamine safely and effectively.',
-              },
-              {
-                title: 'Collaboration with Your Team',
-                description: 'We don\'t believe in isolated treatment. Whenever possible, we work alongside your existing therapist, psychiatrist, or primary care provider to create a comprehensive care plan.',
-              },
-              {
-                title: 'Quality Over Volume',
-                description: 'Haven is intentionally small. We\'d rather see fewer patients and give each person the time, attention, and care they deserve than operate as a high-volume clinic.',
-              },
-            ].map((value) => (
-              <div
-                key={value.title}
-                className="bg-white rounded-xl p-6 lg:p-8 border border-slate-200 shadow-sm"
-              >
-                <h3 className="text-xl font-semibold text-slate-900 mb-3">{value.title}</h3>
-                <p className="text-slate-600 leading-relaxed">{value.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Why Physician-Led Matters Section */}
-      <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-slate-50">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-8 text-center">
-            Why Physician-Led Care Matters
-          </h2>
-          
-          <div className="bg-white rounded-2xl p-8 lg:p-10 border border-slate-200 shadow-sm">
-            <p className="text-slate-700 text-lg leading-relaxed mb-6">
-              Not all ketamine clinics are created equal. Some are run by nurses or physician assistants with minimal physician oversight. Others are staffed by physicians who lack experience with acute care or procedural medications.
-            </p>
-            <p className="text-slate-700 text-lg leading-relaxed mb-6">
-              At Haven, every patient is evaluated and treated directly by a board-certified emergency physician — someone who has managed thousands of critically ill patients, performed hundreds of ketamine administrations, and knows how to respond immediately if anything unexpected happens.
-            </p>
-            <p className="text-slate-700 text-lg leading-relaxed">
-              This isn't about ego or credentials for their own sake. It's about making sure you receive the safest, most effective care possible. Ketamine is a powerful tool when used correctly, and at Haven, it always is.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-6">
-            Ready to Learn More?
-          </h2>
-          <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
-            Join our waitlist to get early access to appointments, opening-week pricing, or schedule a free 10-minute call with Dr. Siddiqui to see if ketamine therapy might be right for you.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/#waitlist"
-              className="inline-block bg-sky-500 hover:bg-sky-600 text-white font-semibold px-8 py-4 rounded-full transition-colors"
-            >
-              Join the Waitlist →
-            </Link>
-            <Link
-              href="/ketamine-therapy"
-              className="inline-block bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/30 text-white font-semibold px-8 py-4 rounded-full transition-colors"
-            >
-              Learn About Ketamine Therapy
-            </Link>
-          </div>
-        </div>
-      </section>
-    </>
-  );
-}
-</file>
-
-<file path="app/components/Footer.tsx">
-import Link from 'next/link';
-
-export default function Footer() {
-  return (
-    <footer className="bg-stone-900 text-sand-200 relative overflow-hidden">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
-          {/* Brand */}
-          <div className="md:col-span-1">
-            <h3 className="text-white font-serif font-medium text-xl mb-3 tracking-wide">Haven</h3>
-            <p className="text-sm text-sand-300 font-light leading-relaxed">
-              Physician-led ketamine therapy in Newport Beach, CA
-            </p>
-          </div>
-
-          {/* Main Pages */}
-          <div>
-            <h4 className="text-sand-100 font-medium mb-4 text-sm uppercase tracking-wide">Learn More</h4>
-            <ul className="space-y-3 text-sm">
-              <li>
-                <Link href="/about" className="text-sand-300 hover:text-sand-100 transition-colors font-light">
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link href="/ketamine-therapy" className="text-sand-300 hover:text-sand-100 transition-colors font-light">
-                  Ketamine Therapy
-                </Link>
-              </li>
-              <li>
-                <Link href="/pricing" className="text-sand-300 hover:text-sand-100 transition-colors font-light">
-                  Pricing
-                </Link>
-              </li>
-              <li>
-                <Link href="/faq" className="text-sand-300 hover:text-sand-100 transition-colors font-light">
-                  FAQ
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Get Started */}
-          <div>
-            <h4 className="text-sand-100 font-medium mb-4 text-sm uppercase tracking-wide">Get Started</h4>
-            <ul className="space-y-3 text-sm">
-              <li>
-                <Link href="/#waitlist" className="text-sand-300 hover:text-sand-100 transition-colors font-light">
-                  Join Waitlist
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="text-sand-300 hover:text-sand-100 transition-colors font-light">
-                  Contact Us
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Legal */}
-          <div>
-            <h4 className="text-sand-100 font-medium mb-4 text-sm uppercase tracking-wide">Legal</h4>
-            <ul className="space-y-3 text-sm">
-              <li>
-                <Link href="/privacy-policy" className="text-sand-300 hover:text-sand-100 transition-colors font-light">
-                  Privacy Policy
-                </Link>
-              </li>
-              <li>
-                <Link href="/terms" className="text-sand-300 hover:text-sand-100 transition-colors font-light">
-                  Terms of Service
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="mt-12 pt-8 border-t border-brown-700/30 text-sm text-sand-300 text-center">
-          <p className="font-light">
-            &copy; {new Date().getFullYear()} Haven Ketamine. All rights reserved.
-          </p>
-          <p className="mt-3 text-xs text-sand-300/80 max-w-2xl mx-auto font-light">
-            Haven Ketamine is not an emergency or crisis service. If you're in immediate danger, call 988 or visit your nearest emergency department.
-          </p>
-        </div>
-      </div>
-    </footer>
-  );
-}
-</file>
-
-<file path="app/components/Header.tsx">
-'use client';
-
-import Link from 'next/link';
-import { useState, useEffect } from 'react';
-
-export default function Header() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  return (
-    <header 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled 
-          ? 'bg-sand-50/80 backdrop-blur-md border-b border-sand-200 shadow-soft' 
-          : 'bg-transparent'
-      }`}
-    >
-      <nav className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
-          {/* Logo */}
-          <Link href="/" className="font-serif font-medium text-xl text-stone-900 tracking-wide">
-            Haven
-          </Link>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
-            <Link href="/" className="text-brown-700 hover:text-stone-900 transition-colors font-light">
-              Home
-            </Link>
-            <Link href="/about" className="text-brown-700 hover:text-stone-900 transition-colors font-light">
-              About
-            </Link>
-            <Link href="/ketamine-therapy" className="text-brown-700 hover:text-stone-900 transition-colors font-light">
-              Therapy
-            </Link>
-            <Link href="/pricing" className="text-brown-700 hover:text-stone-900 transition-colors font-light">
-              Pricing
-            </Link>
-            <Link href="/faq" className="text-brown-700 hover:text-stone-900 transition-colors font-light">
-              FAQ
-            </Link>
-            <Link href="/contact" className="text-brown-700 hover:text-stone-900 transition-colors font-light">
-              Contact
-            </Link>
-            <Link 
-              href="/#waitlist" 
-              className="bg-clay-300 hover:bg-terracotta-400 text-white px-6 py-2.5 rounded-full font-medium transition-all duration-200 shadow-soft hover:shadow-soft-md hover:-translate-y-0.5"
-            >
-              Join Waitlist
-            </Link>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            type="button"
-            className="md:hidden text-stone-900"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            {mobileMenuOpen ? (
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            ) : (
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            )}
-          </button>
-        </div>
-
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <div className="md:hidden py-4 space-y-3 border-t border-sand-200 bg-sand-50/95 backdrop-blur-md rounded-b-2xl">
-            <Link href="/" className="block text-brown-700 hover:text-stone-900 py-2 font-light">
-              Home
-            </Link>
-            <Link href="/about" className="block text-brown-700 hover:text-stone-900 py-2 font-light">
-              About
-            </Link>
-            <Link href="/ketamine-therapy" className="block text-brown-700 hover:text-stone-900 py-2 font-light">
-              Therapy
-            </Link>
-            <Link href="/pricing" className="block text-brown-700 hover:text-stone-900 py-2 font-light">
-              Pricing
-            </Link>
-            <Link href="/faq" className="block text-brown-700 hover:text-stone-900 py-2 font-light">
-              FAQ
-            </Link>
-            <Link href="/contact" className="block text-brown-700 hover:text-stone-900 py-2 font-light">
-              Contact
-            </Link>
-            <Link 
-              href="/#waitlist" 
-              className="block bg-clay-300 hover:bg-terracotta-400 text-white px-6 py-2.5 rounded-full font-medium text-center transition-all duration-200"
-            >
-              Join Waitlist
-            </Link>
-          </div>
-        )}
-      </nav>
-    </header>
-  );
-}
-</file>
-
 <file path="app/components/WaitlistForm.tsx">
 'use client';
 
@@ -1814,1120 +1429,27 @@ export default function WaitlistForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
       <div>
-        <label htmlFor="name" className="block text-sm font-medium text-stone-900 mb-2">
-          Name <span className="text-terracotta-400">*</span>
-        </label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          required
-          className="w-full px-5 py-3.5 rounded-2xl border border-sand-300 bg-sand-50 focus:ring-2 focus:ring-clay-300 focus:border-clay-300 outline-none transition font-light text-stone-900 placeholder:text-brown-700/40"
-          placeholder="Your full name"
-        />
-      </div>
-
-      <div>
-        <label htmlFor="email" className="block text-sm font-medium text-stone-900 mb-2">
-          Email <span className="text-terracotta-400">*</span>
-        </label>
         <input
           type="email"
           id="email"
           name="email"
           required
           className="w-full px-5 py-3.5 rounded-2xl border border-sand-300 bg-sand-50 focus:ring-2 focus:ring-clay-300 focus:border-clay-300 outline-none transition font-light text-stone-900 placeholder:text-brown-700/40"
-          placeholder="your.email@example.com"
-        />
-      </div>
-
-      <div>
-        <label htmlFor="phone" className="block text-sm font-medium text-stone-900 mb-2">
-          Phone <span className="text-brown-700/60 text-xs font-light">(optional)</span>
-        </label>
-        <input
-          type="tel"
-          id="phone"
-          name="phone"
-          className="w-full px-5 py-3.5 rounded-2xl border border-sand-300 bg-sand-50 focus:ring-2 focus:ring-clay-300 focus:border-clay-300 outline-none transition font-light text-stone-900 placeholder:text-brown-700/40"
-          placeholder="(555) 123-4567"
-        />
-      </div>
-
-      <div>
-        <label htmlFor="message" className="block text-sm font-medium text-stone-900 mb-2">
-          What are you hoping ketamine might help with?
-        </label>
-        <textarea
-          id="message"
-          name="message"
-          rows={4}
-          className="w-full px-5 py-3.5 rounded-2xl border border-sand-300 bg-sand-50 focus:ring-2 focus:ring-clay-300 focus:border-clay-300 outline-none transition resize-none font-light text-stone-900 placeholder:text-brown-700/40"
-          placeholder="Feel free to share as much or as little as you're comfortable with..."
+          placeholder="Enter your email"
         />
       </div>
 
       <button
         type="submit"
-        className="w-full bg-terracotta-400 hover:bg-brown-700 text-white font-medium py-4 px-6 rounded-full transition-all duration-200 shadow-soft hover:shadow-soft-md hover:-translate-y-0.5"
+        className="w-full bg-terracotta-400 hover:bg-brown-700 text-white font-medium py-4 px-6 rounded-full transition-all duration-200 shadow-soft hover:shadow-soft-md hover:-translate-y-0.5 cursor-pointer"
       >
-        Join the Waitlist
+        Join Waitlist
       </button>
 
       <p className="text-xs text-brown-700/70 text-center font-light">
-        No spam. No commitment. We'll only contact you about opening dates and scheduling options.
+        We'll only contact you about opening dates and scheduling options.
       </p>
     </form>
-  );
-}
-</file>
-
-<file path="app/contact/page.tsx">
-import type { Metadata } from 'next';
-import WaitlistForm from '../components/WaitlistForm';
-
-export const metadata: Metadata = {
-  title: 'Contact Haven Ketamine | Join the Waitlist in Newport Beach, CA',
-  description: 'Contact Haven Ketamine in Newport Beach, CA. Join our waitlist for early access to physician-led ketamine therapy for depression, anxiety, PTSD, and chronic stress.',
-};
-
-export default function ContactPage() {
-  return (
-    <>
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-5xl mx-auto text-center">
-          <h1 className="text-4xl sm:text-5xl font-bold mb-6">
-            Contact Haven Ketamine
-          </h1>
-          <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-            Get in touch to learn more about our physician-led ketamine therapy in Newport Beach, CA
-          </p>
-        </div>
-      </section>
-
-      {/* Contact Info & Form Section */}
-      <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-5xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12">
-            {/* Contact Information */}
-            <div>
-              <h2 className="text-3xl font-bold text-slate-900 mb-8">
-                Get in Touch
-              </h2>
-              
-              <div className="space-y-8 mb-10">
-                {/* Location */}
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-sky-100 rounded-full flex items-center justify-center flex-shrink-0">
-                    <svg className="w-6 h-6 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-slate-900 mb-1">Location</h3>
-                    <p className="text-slate-600">
-                      Newport Beach, CA<br />
-                      <span className="text-sm text-slate-500">(Exact address coming soon)</span>
-                    </p>
-                    <p className="text-sm text-slate-500 mt-2">
-                      Convenient to Corona del Mar, Balboa Island, Lido Isle, Dover Shores, and surrounding areas
-                    </p>
-                  </div>
-                </div>
-
-                {/* Phone */}
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-sky-100 rounded-full flex items-center justify-center flex-shrink-0">
-                    <svg className="w-6 h-6 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-slate-900 mb-1">Phone</h3>
-                    <p className="text-slate-600">
-                      <span className="text-sm text-slate-500">(Coming soon)</span>
-                    </p>
-                  </div>
-                </div>
-
-                {/* Email */}
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-sky-100 rounded-full flex items-center justify-center flex-shrink-0">
-                    <svg className="w-6 h-6 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-slate-900 mb-1">Email</h3>
-                    <p className="text-slate-600">
-                      <span className="text-sm text-slate-500">(Coming soon)</span>
-                    </p>
-                  </div>
-                </div>
-
-                {/* Hours */}
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-sky-100 rounded-full flex items-center justify-center flex-shrink-0">
-                    <svg className="w-6 h-6 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-slate-900 mb-1">Hours</h3>
-                    <p className="text-slate-600 text-sm">
-                      Monday – Friday: 9:00 AM – 5:00 PM<br />
-                      Saturday & Sunday: Closed<br />
-                      <span className="text-slate-500">(By appointment only)</span>
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Map Placeholder */}
-              <div className="bg-slate-100 rounded-xl h-64 flex items-center justify-center border border-slate-200">
-                <div className="text-center text-slate-500">
-                  <svg className="w-16 h-16 mx-auto mb-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
-                  </svg>
-                  <p className="font-medium">Map coming soon</p>
-                  <p className="text-sm">Newport Beach location</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Contact Form */}
-            <div>
-              <h2 className="text-3xl font-bold text-slate-900 mb-8">
-                Join the Waitlist
-              </h2>
-              
-              <div className="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm">
-                <p className="text-slate-600 mb-6">
-                  We're finalizing our space in Newport Beach and will be opening soon. Join the waitlist to get early access to appointments, opening-week pricing, or schedule a free 10-minute call with the physician.
-                </p>
-                <WaitlistForm />
-              </div>
-
-              {/* Additional Info */}
-              <div className="mt-8 bg-amber-50 border border-amber-200 rounded-xl p-6">
-                <p className="text-sm text-slate-700">
-                  <strong className="text-slate-900">Crisis Resources:</strong> Haven Ketamine is not an emergency or crisis service. If you're in immediate danger or having thoughts of self-harm, please call 988 (Suicide & Crisis Lifeline) or visit your nearest emergency department.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ CTA Section */}
-      <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-slate-50">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-6">
-            Have Questions?
-          </h2>
-          <p className="text-lg text-slate-600 mb-8 max-w-2xl mx-auto">
-            Check out our comprehensive FAQ or learn more about how ketamine therapy works.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="/faq"
-              className="inline-block bg-sky-500 hover:bg-sky-600 text-white font-semibold px-8 py-4 rounded-full transition-colors"
-            >
-              View FAQ →
-            </a>
-            <a
-              href="/ketamine-therapy"
-              className="inline-block bg-white hover:bg-slate-50 border border-slate-300 text-slate-900 font-semibold px-8 py-4 rounded-full transition-colors"
-            >
-              About Ketamine Therapy
-            </a>
-          </div>
-        </div>
-      </section>
-    </>
-  );
-}
-</file>
-
-<file path="app/faq/page.tsx">
-import type { Metadata } from 'next';
-import Link from 'next/link';
-
-export const metadata: Metadata = {
-  title: 'Ketamine Therapy FAQ | Haven Ketamine Newport Beach',
-  description: 'Common questions about ketamine therapy in Newport Beach, CA. Learn about safety, candidacy, treatment experience, insurance, and what to expect from physician-led ketamine infusions.',
-};
-
-const faqs = [
-  {
-    question: 'How is ketamine therapy different from regular antidepressants?',
-    answer: 'Traditional antidepressants (like SSRIs and SNRIs) work on serotonin and norepinephrine systems and can take 6–8 weeks to show effects. Ketamine works through a completely different mechanism — primarily by modulating glutamate, a key neurotransmitter involved in mood regulation and neural plasticity. Many patients notice improvement within hours to days rather than weeks. Ketamine is often used when traditional treatments haven\'t been effective.',
-  },
-  {
-    question: 'Is ketamine therapy safe?',
-    answer: 'When administered by a qualified physician in a medical setting, ketamine is very safe. It has been used in emergency rooms and operating rooms for over 50 years with an excellent safety record. At Haven, you\'ll be continuously monitored during treatment with medical-grade equipment (blood pressure, heart rate, oxygen saturation), and a board-certified emergency physician is present throughout. We screen carefully to ensure ketamine is appropriate for you based on your medical history.',
-  },
-  {
-    question: 'Will I be "tripping" or have a psychedelic experience?',
-    answer: 'Some patients have mild perceptual changes during the infusion, such as feeling floaty, dreamlike, or experiencing slight visual distortions. These effects are temporary and only occur while the medication is being administered. The goal is therapeutic benefit, not a psychedelic experience. You\'ll be in a calm, safe, monitored environment the entire time. Most patients describe the experience as relaxing and peaceful.',
-  },
-  {
-    question: 'Do I need a referral from my psychiatrist or therapist?',
-    answer: 'No formal referral is required to schedule an evaluation at Haven Ketamine. However, we strongly encourage open communication with your existing mental health providers. Ketamine works best as part of a comprehensive treatment plan that includes therapy and other supports. With your permission, we\'ll coordinate with your psychiatrist, therapist, or primary care physician to ensure everyone is on the same page.',
-  },
-  {
-    question: 'How quickly does ketamine therapy work?',
-    answer: 'One of the unique benefits of ketamine is its rapid onset. Many patients notice some improvement within hours to days after their first infusion, though it typically takes several treatments (usually 4–6) to see full, sustained benefits. This is dramatically faster than traditional antidepressants, which often take 6–8 weeks to work. However, individual results vary — not everyone responds the same way or on the same timeline.',
-  },
-  {
-    question: 'Who is a good candidate for ketamine therapy?',
-    answer: 'Good candidates typically include adults with treatment-resistant depression (haven\'t responded to multiple medications), severe anxiety, PTSD, chronic stress, or suicidal ideation (non-emergent). You should be under the care of a therapist or psychiatrist, or willing to engage with one. Certain medical conditions (uncontrolled high blood pressure, active substance abuse, psychotic disorders) may make ketamine inappropriate. A thorough medical evaluation is required to determine candidacy.',
-  },
-  {
-    question: 'What does a ketamine infusion feel like?',
-    answer: 'Most patients feel relaxed, calm, and slightly drowsy during the infusion. Some experience mild dissociation (feeling separated from your body or surroundings), visual or auditory changes, or a dreamlike state. These effects are dose-dependent and temporary — they resolve within 15–30 minutes after the infusion ends. You\'ll be awake and breathing on your own the entire time. Many patients find the experience pleasant and meditative.',
-  },
-  {
-    question: 'How many treatments will I need?',
-    answer: 'Most patients begin with a series of 6 infusions over 2–3 weeks (the "induction phase"). This initial series helps build and stabilize the therapeutic effect. After that, some patients feel fully better and don\'t need further treatment. Others benefit from occasional "booster" infusions every few weeks or months. Your physician will work with you to create a personalized maintenance plan based on your response.',
-  },
-  {
-    question: 'Can I drive after treatment?',
-    answer: 'No. You should not drive or operate heavy machinery for at least 12–24 hours after a ketamine infusion. You\'ll need someone to drive you home after your treatment. Plan to rest for the remainder of the day. Most people can return to normal activities (including work) the next day.',
-  },
-  {
-    question: 'Does insurance cover ketamine therapy?',
-    answer: 'Most insurance plans do not cover ketamine therapy for mental health conditions, as it\'s still considered off-label use by the FDA. Haven Ketamine operates as a cash-based practice. However, many patients use HSA or FSA funds to pay for treatment, and we provide detailed superbills (with CPT codes) that you can submit to your insurance company for possible out-of-network reimbursement. Coverage varies by plan.',
-  },
-  {
-    question: 'Are there any side effects?',
-    answer: 'During treatment, some patients experience mild dissociation, dizziness, nausea, or increased blood pressure. These effects are temporary and resolve quickly after the infusion ends. Long-term side effects are rare when ketamine is used appropriately and under medical supervision. The most common issue is that the therapeutic effects may fade over time, requiring maintenance infusions. Your physician will monitor you closely and adjust your treatment plan as needed.',
-  },
-  {
-    question: 'Can I continue taking my other medications?',
-    answer: 'In most cases, yes. Ketamine can be safely combined with most antidepressants, anti-anxiety medications, and mood stabilizers. However, some medications (like benzodiazepines or lamotrigine) may reduce ketamine\'s effectiveness. During your initial evaluation, the physician will review all your current medications and make recommendations. Never stop or change your medications without consulting your prescribing doctor.',
-  },
-  {
-    question: 'Is ketamine addictive?',
-    answer: 'Ketamine does have potential for misuse and psychological dependence when used recreationally at high doses. However, when administered at therapeutic doses in a controlled medical setting, the risk of addiction is very low. At Haven, we don\'t prescribe take-home ketamine, and all treatments are given on-site under physician supervision. We screen patients for substance use history and monitor for any signs of problematic use.',
-  },
-  {
-    question: 'What should I do to prepare for treatment?',
-    answer: 'Before your first infusion: (1) Eat a light meal 2–3 hours beforehand (don\'t come on an empty stomach, but don\'t eat a heavy meal right before), (2) Arrange for someone to drive you home, (3) Wear comfortable clothing, (4) Avoid alcohol or recreational drugs for at least 24 hours before, (5) Bring a list of your current medications. Your physician will provide specific instructions during your evaluation.',
-  },
-  {
-    question: 'How long do the effects last?',
-    answer: 'The immediate effects of ketamine (dissociation, perceptual changes) last only as long as the infusion and wear off within 15–30 minutes after it ends. The therapeutic effects (mood improvement, reduced anxiety) can last days to weeks after a single infusion. With a series of treatments, many patients experience sustained improvement for months. Maintenance infusions help prolong the benefits.',
-  },
-  {
-    question: 'What if ketamine doesn\'t work for me?',
-    answer: 'Ketamine doesn\'t work for everyone. Response rates for treatment-resistant depression are around 60–70%, which means 30–40% of patients don\'t see significant improvement. If you don\'t respond after the initial series, your physician will discuss other options and can help coordinate with your mental health providers to adjust your treatment plan. You won\'t be charged for treatments beyond what you\'ve already committed to.',
-  },
-  {
-    question: 'Can I do therapy on the same day as ketamine treatment?',
-    answer: 'We don\'t recommend scheduling therapy appointments on the same day as your infusion, as you\'ll need to rest afterward. However, many patients find that ketamine creates a window of improved mood and reduced anxiety that makes therapy more effective in the days and weeks following treatment. Some therapists specialize in "ketamine-assisted psychotherapy" and can work with you around your infusion schedule.',
-  },
-  {
-    question: 'Is Haven Ketamine an emergency service?',
-    answer: 'No. Haven Ketamine is not an emergency or crisis service. If you\'re experiencing a psychiatric emergency, having thoughts of immediate self-harm, or in danger, please call 988 (Suicide & Crisis Lifeline) or go to your nearest emergency department. We provide scheduled, planned ketamine therapy for patients who are stable enough for outpatient treatment.',
-  },
-];
-
-export default function FAQPage() {
-  return (
-    <>
-      {/* JSON-LD Structured Data for FAQ */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'FAQPage',
-            mainEntity: faqs.map((faq) => ({
-              '@type': 'Question',
-              name: faq.question,
-              acceptedAnswer: {
-                '@type': 'Answer',
-                text: faq.answer,
-              },
-            })),
-          }),
-        }}
-      />
-
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-5xl mx-auto text-center">
-          <h1 className="text-4xl sm:text-5xl font-bold mb-6">
-            Ketamine Therapy FAQ
-          </h1>
-          <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-            Common questions about ketamine therapy at Haven Ketamine in Newport Beach, CA
-          </p>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
-          <div className="space-y-6">
-            {faqs.map((faq, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-xl p-6 lg:p-8 border border-slate-200 shadow-sm hover:shadow-md transition-shadow"
-              >
-                <h2 className="text-lg sm:text-xl font-semibold text-slate-900 mb-3">
-                  {faq.question}
-                </h2>
-                <p className="text-slate-600 leading-relaxed">{faq.answer}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Still Have Questions Section */}
-      <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-slate-50">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-6">
-            Still Have Questions?
-          </h2>
-          <p className="text-lg text-slate-600 mb-8 max-w-2xl mx-auto">
-            We're here to help. Join our waitlist to schedule a free 10-minute call with Dr. [Last Name], or send us a message through our contact form.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/#waitlist"
-              className="inline-block bg-sky-500 hover:bg-sky-600 text-white font-semibold px-8 py-4 rounded-full transition-colors"
-            >
-              Join the Waitlist →
-            </Link>
-            <Link
-              href="/contact"
-              className="inline-block bg-white hover:bg-slate-50 border border-slate-300 text-slate-900 font-semibold px-8 py-4 rounded-full transition-colors"
-            >
-              Contact Us
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-6">
-            Ready to Learn More?
-          </h2>
-          <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
-            Explore our comprehensive guide to ketamine therapy or learn about our physician-led approach.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/ketamine-therapy"
-              className="inline-block bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/30 text-white font-semibold px-8 py-4 rounded-full transition-colors"
-            >
-              About Ketamine Therapy
-            </Link>
-            <Link
-              href="/about"
-              className="inline-block bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/30 text-white font-semibold px-8 py-4 rounded-full transition-colors"
-            >
-              About Haven Ketamine
-            </Link>
-          </div>
-        </div>
-      </section>
-    </>
-  );
-}
-</file>
-
-<file path="app/ketamine-therapy/page.tsx">
-import type { Metadata } from 'next';
-import Link from 'next/link';
-
-export const metadata: Metadata = {
-  title: 'Ketamine Therapy in Newport Beach, CA | Evidence-Based Infusion Treatment',
-  description: 'Learn how ketamine therapy works for depression, anxiety, PTSD, and chronic stress. Physician-led IV ketamine infusions in Newport Beach, CA with hospital-level safety standards.',
-};
-
-export default function KetamineTherapyPage() {
-  return (
-    <>
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-5xl mx-auto text-center">
-          <h1 className="text-4xl sm:text-5xl font-bold mb-6">
-            Ketamine Therapy in Newport Beach, CA
-          </h1>
-          <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-            Evidence-based IV ketamine infusion treatment for depression, anxiety, PTSD, and chronic stress — provided by a board-certified emergency physician in Newport Beach.
-          </p>
-        </div>
-      </section>
-
-      {/* What is Ketamine Therapy Section */}
-      <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-8 text-center">
-            What Is Ketamine Therapy?
-          </h2>
-          
-          <div className="bg-white rounded-2xl p-8 lg:p-10 border border-slate-200 shadow-sm mb-8">
-            <p className="text-slate-700 text-lg leading-relaxed mb-6">
-              Ketamine is a medication that has been used safely in hospitals and emergency rooms for over 50 years. Originally developed as an anesthetic, researchers discovered that at lower, sub-anesthetic doses, ketamine can rapidly reduce symptoms of depression, anxiety, PTSD, and chronic stress.
-            </p>
-            <p className="text-slate-700 text-lg leading-relaxed mb-6">
-              Unlike traditional antidepressants (SSRIs, SNRIs) that work on serotonin or norepinephrine, ketamine works through a completely different mechanism — primarily by modulating glutamate, a key neurotransmitter involved in mood regulation and neural plasticity. This unique mechanism is why ketamine often works when other treatments have failed.
-            </p>
-            <p className="text-slate-700 text-lg leading-relaxed">
-              At Haven Ketamine, we administer ketamine via slow IV infusion in a comfortable, monitored setting. The treatment typically takes 60–90 minutes, and many patients notice improvement within hours to days — significantly faster than conventional medications.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* How IV Ketamine Infusions Work Section */}
-      <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-white">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-12 text-center">
-            How IV Ketamine Infusions Work
-          </h2>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-slate-50 rounded-xl p-6 lg:p-8 border border-slate-200">
-              <div className="w-12 h-12 bg-sky-500 rounded-full flex items-center justify-center text-white font-bold text-xl mb-4">
-                1
-              </div>
-              <h3 className="text-xl font-semibold text-slate-900 mb-3">Medical Screening</h3>
-              <p className="text-slate-600 leading-relaxed">
-                Before your first infusion, you'll meet with the physician for a comprehensive evaluation of your medical history, current medications, mental health history, and treatment goals. Not everyone is a candidate for ketamine therapy, and we'll make sure it's safe and appropriate for you.
-              </p>
-            </div>
-
-            <div className="bg-slate-50 rounded-xl p-6 lg:p-8 border border-slate-200">
-              <div className="w-12 h-12 bg-sky-500 rounded-full flex items-center justify-center text-white font-bold text-xl mb-4">
-                2
-              </div>
-              <h3 className="text-xl font-semibold text-slate-900 mb-3">The Infusion Session</h3>
-              <p className="text-slate-600 leading-relaxed">
-                On treatment day, you'll relax in a private room with comfortable seating, soft lighting, and a calm atmosphere. A small IV will be placed, and ketamine will be administered slowly over 40–60 minutes. You'll be monitored continuously (blood pressure, heart rate, oxygen levels) throughout the session.
-              </p>
-            </div>
-
-            <div className="bg-slate-50 rounded-xl p-6 lg:p-8 border border-slate-200">
-              <div className="w-12 h-12 bg-sky-500 rounded-full flex items-center justify-center text-white font-bold text-xl mb-4">
-                3
-              </div>
-              <h3 className="text-xl font-semibold text-slate-900 mb-3">During Treatment</h3>
-              <p className="text-slate-600 leading-relaxed">
-                Most patients feel relaxed and calm during the infusion. Some experience mild perceptual changes (feeling floaty, dreamlike, or disconnected from surroundings). These effects are temporary and resolve within minutes after the infusion ends. A physician is present throughout to ensure your safety and comfort.
-              </p>
-            </div>
-
-            <div className="bg-slate-50 rounded-xl p-6 lg:p-8 border border-slate-200">
-              <div className="w-12 h-12 bg-sky-500 rounded-full flex items-center justify-center text-white font-bold text-xl mb-4">
-                4
-              </div>
-              <h3 className="text-xl font-semibold text-slate-900 mb-3">Recovery & Discharge</h3>
-              <p className="text-slate-600 leading-relaxed">
-                After the infusion, you'll rest for 15–30 minutes while the effects wear off. You'll need someone to drive you home, as you should not drive for the rest of the day. Most people can return to normal activities the next day.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Conditions Section */}
-      <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-8 text-center">
-            Conditions Ketamine May Help
-          </h2>
-          
-          <p className="text-lg text-slate-600 text-center max-w-3xl mx-auto mb-12">
-            Research and clinical experience suggest that ketamine therapy can be beneficial for several mental health and chronic pain conditions, especially when traditional treatments haven't worked.
-          </p>
-
-          <div className="grid md:grid-cols-2 gap-8 mb-10">
-            {[
-              {
-                title: 'Treatment-Resistant Depression',
-                description: 'Ketamine has been shown to rapidly reduce symptoms in patients who haven\'t responded to multiple antidepressants. Studies show response rates of 60-70% in treatment-resistant cases.',
-              },
-              {
-                title: 'Severe Anxiety & Panic Disorder',
-                description: 'Many patients with generalized anxiety, panic disorder, or social anxiety notice significant improvement in symptoms, often within hours of treatment.',
-              },
-              {
-                title: 'PTSD & Trauma-Related Conditions',
-                description: 'Ketamine may help reduce intrusive thoughts, flashbacks, hypervigilance, and other PTSD symptoms — particularly when combined with therapy.',
-              },
-              {
-                title: 'Chronic Stress & Burnout',
-                description: 'For patients experiencing severe, persistent stress that impacts daily functioning, ketamine can provide rapid relief and create space for other therapeutic work.',
-              },
-              {
-                title: 'Suicidal Ideation (Non-Emergent)',
-                description: 'Research shows ketamine can quickly reduce suicidal thoughts in controlled settings. Haven Ketamine is not an emergency service, but we can work with patients under the care of a psychiatrist or therapist.',
-              },
-              {
-                title: 'Chronic Pain (Select Cases)',
-                description: 'Ketamine has shown promise for certain chronic pain conditions, including fibromyalgia, complex regional pain syndrome (CRPS), and neuropathic pain.',
-              },
-            ].map((condition) => (
-              <div
-                key={condition.title}
-                className="bg-white rounded-xl p-6 lg:p-8 border border-slate-200 shadow-sm"
-              >
-                <h3 className="text-xl font-semibold text-slate-900 mb-3">{condition.title}</h3>
-                <p className="text-slate-600 leading-relaxed">{condition.description}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="bg-amber-50 border border-amber-200 rounded-xl p-6 lg:p-8">
-            <p className="text-slate-700 text-lg leading-relaxed">
-              <strong className="text-slate-900">Important:</strong> Individual results vary, and ketamine therapy is not appropriate for everyone. During your initial evaluation, we'll discuss whether you're a good candidate based on your medical history, current medications, and treatment goals.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Why Physician-Led Matters Section */}
-      <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-slate-50">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-8 text-center">
-            Why Physician-Led Ketamine Therapy Matters
-          </h2>
-          
-          <div className="bg-white rounded-2xl p-8 lg:p-10 border border-slate-200 shadow-sm mb-8">
-            <p className="text-slate-700 text-lg leading-relaxed mb-6">
-              Ketamine is a powerful medication with a strong safety record — when administered correctly. However, not all ketamine providers have the same level of training, experience, or oversight.
-            </p>
-            <p className="text-slate-700 text-lg leading-relaxed mb-6">
-              At Haven Ketamine in Newport Beach, every patient is evaluated and treated directly by a board-certified emergency physician with years of experience using ketamine in high-acuity settings. This means:
-            </p>
-          </div>
-
-          <div className="grid sm:grid-cols-2 gap-6">
-            {[
-              {
-                title: 'Expert Dosing',
-                description: 'Your physician understands how to tailor dosing based on your weight, medical history, response, and goals.',
-              },
-              {
-                title: 'Immediate Response',
-                description: 'If any complications arise (rare, but possible), a physician is present and trained to respond immediately.',
-              },
-              {
-                title: 'Medical Screening',
-                description: 'A thorough evaluation ensures ketamine is safe given your medical history, medications, and conditions.',
-              },
-              {
-                title: 'Continuous Monitoring',
-                description: 'Medical-grade monitoring equipment and protocols throughout your treatment, just like in a hospital.',
-              },
-              {
-                title: 'Coordination of Care',
-                description: 'Your physician can communicate directly with your psychiatrist, therapist, or primary care provider.',
-              },
-              {
-                title: 'Evidence-Based Protocols',
-                description: 'Treatment plans based on current research and clinical guidelines, not marketing hype.',
-              },
-            ].map((item) => (
-              <div
-                key={item.title}
-                className="bg-white rounded-xl p-6 border border-slate-200 shadow-sm"
-              >
-                <h3 className="font-semibold text-slate-900 mb-2">{item.title}</h3>
-                <p className="text-slate-600 text-sm leading-relaxed">{item.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Treatment Course Section */}
-      <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-8 text-center">
-            Typical Treatment Course
-          </h2>
-          
-          <div className="bg-white rounded-2xl p-8 lg:p-10 border border-slate-200 shadow-sm">
-            <div className="mb-8">
-              <h3 className="text-xl font-semibold text-slate-900 mb-3">Induction Phase (Initial Series)</h3>
-              <p className="text-slate-700 leading-relaxed mb-4">
-                Most patients begin with a series of <strong>6 infusions over 2–3 weeks</strong>. This initial &quot;induction phase&quot; helps build and stabilize the therapeutic effect. Research suggests that consistent, closely spaced treatments during this phase produce the best outcomes.
-              </p>
-              <p className="text-slate-600 text-sm italic">
-                Example schedule: Monday, Wednesday, Friday for two consecutive weeks.
-              </p>
-            </div>
-
-            <div className="mb-8">
-              <h3 className="text-xl font-semibold text-slate-900 mb-3">Maintenance Phase (Optional)</h3>
-              <p className="text-slate-700 leading-relaxed mb-4">
-                After the initial series, some patients feel fully better and don't need further treatment. Others benefit from occasional "booster" infusions every few weeks or months to maintain symptom relief. Your physician will work with you to find the right schedule based on how you respond.
-              </p>
-              <p className="text-slate-600 text-sm italic">
-                Example: One infusion every 4–6 weeks as needed.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="text-xl font-semibold text-slate-900 mb-3">Integration & Support</h3>
-              <p className="text-slate-700 leading-relaxed">
-                Ketamine works best when combined with therapy, lifestyle changes, and ongoing mental health support. We strongly encourage working with a therapist or psychiatrist alongside ketamine treatment, and we'll help coordinate care whenever possible.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Disclaimer Section */}
-      <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-slate-50">
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-slate-100 border border-slate-300 rounded-xl p-8">
-            <h3 className="text-xl font-semibold text-slate-900 mb-4">Important Disclaimers</h3>
-            <ul className="space-y-3 text-slate-700">
-              <li className="flex items-start gap-3">
-                <svg className="w-5 h-5 text-slate-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-                </svg>
-                <span>Ketamine therapy is not a &quot;cure&quot; and does not work for everyone. Individual results vary.</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <svg className="w-5 h-5 text-slate-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-                </svg>
-                <span>Not everyone is a candidate. Medical screening is required before starting treatment.</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <svg className="w-5 h-5 text-slate-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-                </svg>
-                <span>Haven Ketamine is not an emergency or crisis service. If you're in immediate danger, call 988 or visit your nearest emergency department.
-              </li>
-              <li className="flex items-start gap-3">
-                <svg className="w-5 h-5 text-slate-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-                </svg>
-                <span>Ketamine therapy is most effective when combined with psychotherapy and other mental health supports.</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-6">
-            Ready to Learn If Ketamine Therapy Is Right for You?
-          </h2>
-          <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
-            Join our waitlist for early access to appointments and opening-week pricing, or explore our FAQ to learn more.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/#waitlist"
-              className="inline-block bg-sky-500 hover:bg-sky-600 text-white font-semibold px-8 py-4 rounded-full transition-colors"
-            >
-              Join the Waitlist →
-            </Link>
-            <Link
-              href="/faq"
-              className="inline-block bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/30 text-white font-semibold px-8 py-4 rounded-full transition-colors"
-            >
-              Read the FAQ
-            </Link>
-          </div>
-        </div>
-      </section>
-    </>
-  );
-}
-</file>
-
-<file path="app/pricing/page.tsx">
-import type { Metadata } from 'next';
-import Link from 'next/link';
-
-export const metadata: Metadata = {
-  title: 'Ketamine Treatment Pricing | Haven Ketamine Newport Beach, CA',
-  description: 'Transparent, cash-based pricing for physician-led ketamine therapy in Newport Beach. HSA/FSA accepted. Out-of-network insurance documentation available.',
-};
-
-export default function PricingPage() {
-  return (
-    <>
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-5xl mx-auto text-center">
-          <h1 className="text-4xl sm:text-5xl font-bold mb-6">
-            Transparent Pricing
-          </h1>
-          <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-            Clear, straightforward pricing with no hidden fees. We operate as a cash-based practice so we can focus on your care, not insurance paperwork.
-          </p>
-        </div>
-      </section>
-
-      {/* Why Cash-Based Section */}
-      <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-8 text-center">
-            Why We're Cash-Based
-          </h2>
-          
-          <div className="bg-white rounded-2xl p-8 lg:p-10 border border-slate-200 shadow-sm mb-8">
-            <p className="text-slate-700 text-lg leading-relaxed mb-6">
-              Haven Ketamine operates as a cash-based practice, meaning we do not bill insurance directly. This allows us to:
-            </p>
-            
-            <ul className="space-y-4 mb-6">
-              {[
-                'Spend more time with each patient without pressure to rush',
-                'Offer personalized treatment plans based on your needs, not insurance restrictions',
-                'Avoid the delays and denials that come with insurance authorization processes',
-                'Keep pricing transparent and predictable',
-                'Focus on quality care rather than billing codes and paperwork',
-              ].map((item, index) => (
-                <li key={index} className="flex items-start gap-3">
-                  <svg className="w-6 h-6 text-sky-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                  </svg>
-                  <span className="text-slate-700 text-lg">{item}</span>
-                </li>
-              ))}
-            </ul>
-
-            <p className="text-slate-700 text-lg leading-relaxed">
-              That said, we understand cost is a real concern. Many patients use HSA or FSA funds to cover treatment, and we provide documentation you can submit to your insurance company for possible out-of-network reimbursement.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Pricing Section */}
-      <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-slate-50">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-12 text-center">
-            Treatment Pricing
-          </h2>
-
-          <div className="grid md:grid-cols-2 gap-8 mb-12">
-            {/* Initial Evaluation */}
-            <div className="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm">
-              <div className="mb-4">
-                <h3 className="text-2xl font-bold text-slate-900 mb-2">Initial Medical Evaluation</h3>
-                <div className="text-4xl font-bold text-sky-600 mb-4">$350</div>
-              </div>
-              <p className="text-slate-600 mb-6">
-                Comprehensive assessment with the physician including medical history review, mental health evaluation, medication review, and treatment planning.
-              </p>
-              <ul className="space-y-2 text-sm text-slate-600">
-                <li className="flex items-start gap-2">
-                  <svg className="w-5 h-5 text-sky-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  <span>45–60 minute appointment</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <svg className="w-5 h-5 text-sky-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  <span>Board-certified physician evaluation</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <svg className="w-5 h-5 text-sky-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  <span>Personalized treatment plan</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Single Infusion */}
-            <div className="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm">
-              <div className="mb-4">
-                <h3 className="text-2xl font-bold text-slate-900 mb-2">Single Ketamine Infusion</h3>
-                <div className="text-4xl font-bold text-sky-600 mb-4">$750</div>
-              </div>
-              <p className="text-slate-600 mb-6">
-                Individual IV ketamine infusion session with continuous monitoring and physician oversight.
-              </p>
-              <ul className="space-y-2 text-sm text-slate-600">
-                <li className="flex items-start gap-2">
-                  <svg className="w-5 h-5 text-sky-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  <span>60–90 minute session</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <svg className="w-5 h-5 text-sky-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  <span>Private treatment room</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <svg className="w-5 h-5 text-sky-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  <span>Continuous vital sign monitoring</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <svg className="w-5 h-5 text-sky-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  <span>Physician present throughout</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* 6-Infusion Series */}
-            <div className="bg-gradient-to-br from-sky-500 to-sky-600 text-white rounded-2xl p-8 border-2 border-sky-400 shadow-lg md:col-span-2">
-              <div className="flex items-start justify-between mb-4">
-                <div>
-                  <div className="inline-block bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-semibold mb-3">
-                    MOST POPULAR
-                  </div>
-                  <h3 className="text-2xl font-bold mb-2">6-Infusion Series Package</h3>
-                  <div className="text-4xl font-bold mb-4">$3,900</div>
-                </div>
-              </div>
-              <p className="text-sky-50 mb-6 text-lg">
-                Complete initial treatment series with discounted package pricing. Most patients begin with this option for the best clinical outcomes.
-              </p>
-              <div className="grid sm:grid-cols-2 gap-4">
-                <ul className="space-y-2 text-sm">
-                  <li className="flex items-start gap-2">
-                    <svg className="w-5 h-5 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
-                    <span>6 ketamine infusions</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <svg className="w-5 h-5 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
-                    <span>Scheduled over 2–3 weeks</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <svg className="w-5 h-5 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
-                    <span>Discounted package rate</span>
-                  </li>
-                </ul>
-                <ul className="space-y-2 text-sm">
-                  <li className="flex items-start gap-2">
-                    <svg className="w-5 h-5 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
-                    <span>Progress tracking & follow-up</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <svg className="w-5 h-5 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
-                    <span>Physician oversight throughout</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <svg className="w-5 h-5 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
-                    <span>Care coordination support</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          {/* Maintenance & Add-Ons */}
-          <div className="grid md:grid-cols-2 gap-8 mb-8">
-            {/* Maintenance Infusions */}
-            <div className="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm">
-              <div className="mb-4">
-                <h3 className="text-2xl font-bold text-slate-900 mb-2">Maintenance Infusions</h3>
-                <div className="text-4xl font-bold text-sky-600 mb-4">$595</div>
-              </div>
-              <p className="text-slate-600 mb-6">
-                Follow-up ketamine infusions to maintain therapeutic benefits after completing your initial series.
-              </p>
-              <ul className="space-y-2 text-sm text-slate-600">
-                <li className="flex items-start gap-2">
-                  <svg className="w-5 h-5 text-sky-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  <span>Scheduled as needed</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <svg className="w-5 h-5 text-sky-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  <span>Typically monthly or as recommended</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <svg className="w-5 h-5 text-sky-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  <span>Same quality care and monitoring</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* NAD+ Therapy */}
-            <div className="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm">
-              <div className="mb-4">
-                <h3 className="text-2xl font-bold text-slate-900 mb-2">Optional NAD+ Therapy</h3>
-                <div className="text-4xl font-bold text-sky-600 mb-4">from $395</div>
-              </div>
-              <p className="text-slate-600 mb-6">
-                NAD+ therapy for cellular health, mental clarity, and energy enhancement. Can be combined with ketamine treatment.
-              </p>
-              <ul className="space-y-2 text-sm text-slate-600">
-                <li className="flex items-start gap-2">
-                  <svg className="w-5 h-5 text-sky-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  <span>Supports cellular energy</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <svg className="w-5 h-5 text-sky-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  <span>Enhances mental clarity</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <svg className="w-5 h-5 text-sky-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  <span>Available as add-on or standalone</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Payment Options Section */}
-      <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-12 text-center">
-            Payment Options
-          </h2>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white rounded-xl p-6 border border-slate-200 shadow-sm text-center">
-              <div className="w-16 h-16 bg-sky-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-8 h-8 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
-                </svg>
-              </div>
-              <h3 className="font-semibold text-slate-900 mb-2">Credit/Debit Card</h3>
-              <p className="text-sm text-slate-600">
-                We accept all major credit and debit cards for payment at the time of service.
-              </p>
-            </div>
-
-            <div className="bg-white rounded-xl p-6 border border-slate-200 shadow-sm text-center">
-              <div className="w-16 h-16 bg-sky-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-8 h-8 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-              </div>
-              <h3 className="font-semibold text-slate-900 mb-2">HSA / FSA</h3>
-              <p className="text-sm text-slate-600">
-                Ketamine therapy often qualifies for HSA or FSA reimbursement. Check with your plan administrator.
-              </p>
-            </div>
-
-            <div className="bg-white rounded-xl p-6 border border-slate-200 shadow-sm text-center">
-              <div className="w-16 h-16 bg-sky-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-8 h-8 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
-              </div>
-              <h3 className="font-semibold text-slate-900 mb-2">Insurance Documentation</h3>
-              <p className="text-sm text-slate-600">
-                We provide detailed superbills you can submit to your insurance for possible out-of-network reimbursement.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-slate-50">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-12 text-center">
-            Pricing Questions
-          </h2>
-
-          <div className="space-y-6">
-            {[
-              {
-                question: 'Will my insurance cover ketamine therapy?',
-                answer: 'Most insurance plans do not cover ketamine therapy for mental health conditions, as it\'s still considered off-label use. However, some plans may offer partial out-of-network reimbursement. We provide detailed superbills with CPT codes that you can submit to your insurer.',
-              },
-              {
-                question: 'Can I use my HSA or FSA?',
-                answer: 'Yes! Many patients successfully use HSA (Health Savings Account) or FSA (Flexible Spending Account) funds to pay for ketamine therapy. Check with your plan administrator to confirm coverage.',
-              },
-              {
-                question: 'Do you offer payment plans?',
-                answer: 'At this time, payment is due at the time of service. However, we\'re exploring options for payment plans and will update this information as those become available.',
-              },
-              {
-                question: 'Are there any hidden fees?',
-                answer: 'No. The pricing listed above is all-inclusive. There are no facility fees, monitoring fees, or surprise charges. The only additional costs would be optional add-ons (like IV vitamins) that you choose to include.',
-              },
-              {
-                question: 'What if I need more or fewer than 6 infusions?',
-                answer: 'Treatment is personalized. Some patients feel better after 4 infusions, while others may need 8–10. The 6-infusion series is the most common starting point based on research, but your physician will adjust based on your response.',
-              },
-            ].map((faq) => (
-              <div key={faq.question} className="bg-white rounded-xl p-6 lg:p-8 border border-slate-200 shadow-sm">
-                <h3 className="text-lg font-semibold text-slate-900 mb-3">{faq.question}</h3>
-                <p className="text-slate-600 leading-relaxed">{faq.answer}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-6">
-            Ready to Get Started?
-          </h2>
-          <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
-            Join our waitlist to receive early access to appointments and opening-week pricing information.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/#waitlist"
-              className="inline-block bg-sky-500 hover:bg-sky-600 text-white font-semibold px-8 py-4 rounded-full transition-colors"
-            >
-              Join the Waitlist →
-            </Link>
-            <Link
-              href="/contact"
-              className="inline-block bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/30 text-white font-semibold px-8 py-4 rounded-full transition-colors"
-            >
-              Contact Us
-            </Link>
-          </div>
-        </div>
-      </section>
-    </>
   );
 }
 </file>
@@ -3108,6 +1630,345 @@ Or connect your GitHub repo to Vercel for automatic deployments.
 For questions or issues, contact the development team.
 </file>
 
+<file path="app/components/Footer.tsx">
+'use client';
+
+import Link from 'next/link';
+
+export default function Footer() {
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const headerOffset = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  return (
+    <footer className="bg-stone-900 text-sand-200 relative overflow-hidden">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+          {/* Brand */}
+          <div className="md:col-span-1">
+            <h3 className="text-white font-serif font-medium text-xl mb-3 tracking-wide">Haven</h3>
+            <p className="text-sm text-sand-300 font-light leading-relaxed">
+              Physician-led ketamine therapy in Newport Beach, CA
+            </p>
+          </div>
+
+          {/* Main Pages */}
+          <div>
+            <h4 className="text-sand-100 font-medium mb-4 text-sm uppercase tracking-wide">Quick Links</h4>
+            <ul className="space-y-3 text-sm">
+              <li>
+                <button 
+                  onClick={() => scrollToSection('therapy')}
+                  className="text-sand-300 hover:text-sand-100 transition-colors font-light text-left"
+                >
+                  Ketamine Therapy
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => scrollToSection('pricing')}
+                  className="text-sand-300 hover:text-sand-100 transition-colors font-light text-left"
+                >
+                  Pricing
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => scrollToSection('about')}
+                  className="text-sand-300 hover:text-sand-100 transition-colors font-light text-left"
+                >
+                  About Us
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => scrollToSection('faq')}
+                  className="text-sand-300 hover:text-sand-100 transition-colors font-light text-left"
+                >
+                  FAQ
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => scrollToSection('contact')}
+                  className="text-sand-300 hover:text-sand-100 transition-colors font-light text-left"
+                >
+                  Contact
+                </button>
+              </li>
+            </ul>
+          </div>
+
+          {/* Legal */}
+          <div>
+            <h4 className="text-sand-100 font-medium mb-4 text-sm uppercase tracking-wide">Legal</h4>
+            <ul className="space-y-3 text-sm">
+              <li>
+                <Link href="/privacy-policy" className="text-sand-300 hover:text-sand-100 transition-colors font-light">
+                  Privacy Policy
+                </Link>
+              </li>
+              <li>
+                <Link href="/terms" className="text-sand-300 hover:text-sand-100 transition-colors font-light">
+                  Terms of Service
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="mt-12 pt-8 border-t border-brown-700/30 text-sm text-sand-300 text-center">
+          <p className="font-light">
+            &copy; {new Date().getFullYear()} Haven Ketamine. All rights reserved.
+          </p>
+          <p className="mt-3 text-xs text-sand-300/80 max-w-2xl mx-auto font-light">
+            Haven Ketamine is not an emergency or crisis service. If you're in immediate danger, call 988 or visit your nearest emergency department.
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+}
+</file>
+
+<file path="app/components/Header.tsx">
+'use client';
+
+import { useState, useEffect } from 'react';
+
+export default function Header() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const headerOffset = 80; // Account for fixed header
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+      setMobileMenuOpen(false);
+    }
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+    setMobileMenuOpen(false);
+  };
+
+  return (
+    <header 
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled 
+          ? 'bg-sand-50/80 backdrop-blur-md border-b border-sand-200 shadow-soft' 
+          : 'bg-transparent'
+      }`}
+    >
+      <nav className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-20">
+          {/* Logo */}
+          <button 
+            onClick={scrollToTop}
+            className="font-serif font-medium text-xl text-stone-900 tracking-wide cursor-pointer hover:opacity-80 transition-opacity"
+          >
+            Haven
+          </button>
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-8">
+            <button 
+              onClick={() => scrollToSection('therapy')}
+              className="text-brown-700 hover:text-stone-900 transition-colors font-light cursor-pointer"
+            >
+              Therapy
+            </button>
+            <button 
+              onClick={() => scrollToSection('pricing')}
+              className="text-brown-700 hover:text-stone-900 transition-colors font-light cursor-pointer"
+            >
+              Pricing
+            </button>
+            <button 
+              onClick={() => scrollToSection('about')}
+              className="text-brown-700 hover:text-stone-900 transition-colors font-light cursor-pointer"
+            >
+              About
+            </button>
+            <button 
+              onClick={() => scrollToSection('faq')}
+              className="text-brown-700 hover:text-stone-900 transition-colors font-light cursor-pointer"
+            >
+              FAQ
+            </button>
+            <button 
+              onClick={() => scrollToSection('contact')}
+              className="bg-clay-300 hover:bg-terracotta-400 text-white px-6 py-2.5 rounded-full font-medium transition-all duration-200 shadow-soft hover:shadow-soft-md hover:-translate-y-0.5 cursor-pointer"
+            >
+              Join Waitlist
+            </button>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            type="button"
+            className="md:hidden text-stone-900"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? (
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            ) : (
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            )}
+          </button>
+        </div>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden py-4 space-y-3 border-t border-sand-200 bg-sand-50/95 backdrop-blur-md rounded-b-2xl">
+            <button 
+              onClick={() => scrollToSection('therapy')}
+              className="block w-full text-left text-brown-700 hover:text-stone-900 py-2 font-light"
+            >
+              Therapy
+            </button>
+            <button 
+              onClick={() => scrollToSection('pricing')}
+              className="block w-full text-left text-brown-700 hover:text-stone-900 py-2 font-light"
+            >
+              Pricing
+            </button>
+            <button 
+              onClick={() => scrollToSection('about')}
+              className="block w-full text-left text-brown-700 hover:text-stone-900 py-2 font-light"
+            >
+              About
+            </button>
+            <button 
+              onClick={() => scrollToSection('faq')}
+              className="block w-full text-left text-brown-700 hover:text-stone-900 py-2 font-light"
+            >
+              FAQ
+            </button>
+            <button 
+              onClick={() => scrollToSection('contact')}
+              className="block bg-clay-300 hover:bg-terracotta-400 text-white px-6 py-2.5 rounded-full font-medium text-center transition-all duration-200 w-full cursor-pointer"
+            >
+              Join Waitlist
+            </button>
+          </div>
+        )}
+      </nav>
+    </header>
+  );
+}
+</file>
+
+<file path="app/layout.tsx">
+import type { Metadata } from "next";
+import { Inter, Playfair_Display } from "next/font/google";
+import "./globals.css";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+  display: 'swap',
+});
+
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: 'swap',
+});
+
+export const metadata: Metadata = {
+  metadataBase: new URL('https://havenketamine.com'),
+  title: "Haven Ketamine | Physician-Led Ketamine Therapy in Newport Beach, CA",
+  description: "Haven Ketamine is a physician-led clinic in Newport Beach providing safe, evidence-based ketamine infusions for depression, anxiety, PTSD, and chronic stress. Join the waitlist for our opening.",
+  keywords: [
+    "ketamine therapy Newport Beach",
+    "ketamine clinic Newport Beach CA",
+    "IV ketamine infusion Newport Beach",
+    "ketamine treatment for depression Newport Beach",
+    "ketamine therapy anxiety PTSD Orange County",
+    "physician-led ketamine therapy",
+    "ketamine infusion Newport Beach"
+  ],
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://havenketamine.com",
+    siteName: "Haven Ketamine",
+    title: "Haven Ketamine | Physician-Led Ketamine Therapy in Newport Beach, CA",
+    description: "Haven Ketamine is a physician-led clinic in Newport Beach providing safe, evidence-based ketamine infusions for depression, anxiety, PTSD, and chronic stress. Join the waitlist for our opening.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Haven Ketamine | Physician-Led Ketamine Therapy in Newport Beach, CA",
+    description: "Physician-led ketamine therapy for depression, anxiety, PTSD, and chronic stress in Newport Beach, CA.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  verification: {
+    // TODO: Add Google Search Console verification code
+  },
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <body
+        className={`${inter.variable} ${playfair.variable} bg-sand-50 text-stone-900 antialiased`}
+      >
+        <Header />
+        <main>{children}</main>
+        <Footer />
+      </body>
+    </html>
+  );
+}
+</file>
+
 <file path="app/globals.css">
 @import "tailwindcss";
 
@@ -3118,6 +1979,7 @@ For questions or issues, contact the development team.
   --sand-200: #E1D9C9;
   --sand-300: #D2C5B5;
   --clay-300: #B18A72;
+  --clay-500: #9B7055;
   --terracotta-400: #A06A55;
   --brown-700: #4A3B32;
   --stone-900: #2E2A26;
@@ -3133,6 +1995,7 @@ For questions or issues, contact the development team.
   --color-sand-200: var(--sand-200);
   --color-sand-300: var(--sand-300);
   --color-clay-300: var(--clay-300);
+  --color-clay-500: var(--clay-500);
   --color-terracotta-400: var(--terracotta-400);
   --color-brown-700: var(--brown-700);
   --color-stone-900: var(--stone-900);
@@ -3247,6 +2110,7 @@ html {
   font-weight: 500;
   transition: all 200ms ease;
   box-shadow: 0 2px 8px rgba(177, 138, 114, 0.2);
+  cursor: pointer;
 }
 
 .btn-primary:hover {
@@ -3263,6 +2127,7 @@ html {
   font-weight: 500;
   border: 1px solid var(--sand-300);
   transition: all 200ms ease;
+  cursor: pointer;
 }
 
 .btn-secondary:hover {
@@ -3271,84 +2136,10 @@ html {
 }
 </file>
 
-<file path="app/layout.tsx">
-import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
-import "./globals.css";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-  display: 'swap',
-});
-
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  display: 'swap',
-});
-
-export const metadata: Metadata = {
-  metadataBase: new URL('https://havenketamine.com'),
-  title: "Haven Ketamine | Physician-Led Ketamine Therapy in Newport Beach, CA",
-  description: "Haven Ketamine is a physician-led clinic in Newport Beach providing safe, evidence-based ketamine infusions for depression, anxiety, PTSD, and chronic stress. Join the waitlist for our opening.",
-  keywords: [
-    "ketamine therapy Newport Beach",
-    "ketamine clinic Newport Beach CA",
-    "IV ketamine infusion Newport Beach",
-    "ketamine treatment for depression Newport Beach",
-    "ketamine therapy anxiety PTSD Orange County",
-    "physician-led ketamine therapy",
-    "ketamine infusion Newport Beach"
-  ],
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: "https://havenketamine.com",
-    siteName: "Haven Ketamine",
-    title: "Haven Ketamine | Physician-Led Ketamine Therapy in Newport Beach, CA",
-    description: "Haven Ketamine is a physician-led clinic in Newport Beach providing safe, evidence-based ketamine infusions for depression, anxiety, PTSD, and chronic stress. Join the waitlist for our opening.",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Haven Ketamine | Physician-Led Ketamine Therapy in Newport Beach, CA",
-    description: "Physician-led ketamine therapy for depression, anxiety, PTSD, and chronic stress in Newport Beach, CA.",
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-  verification: {
-    // TODO: Add Google Search Console verification code
-  },
-};
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html lang="en">
-      <body
-        className={`${inter.variable} ${playfair.variable} bg-sand-50 text-stone-900 antialiased`}
-      >
-        <Header />
-        <main>{children}</main>
-        <Footer />
-      </body>
-    </html>
-  );
-}
-</file>
-
 <file path="app/page.tsx">
 import Link from 'next/link';
 import WaitlistForm from './components/WaitlistForm';
+import HeroEmailSignup from './components/HeroEmailSignup';
 
 export default function HomePage() {
   return (
@@ -3434,20 +2225,7 @@ export default function HomePage() {
             </p>
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-4 mb-8">
-              <a
-                href="#waitlist"
-                className="btn-primary inline-block text-center"
-              >
-                Join the Waitlist
-              </a>
-              <a
-                href="#intro-call"
-                className="btn-secondary inline-block text-center"
-              >
-                Free 10-Minute Call
-              </a>
-            </div>
+            <HeroEmailSignup />
 
             {/* Trust Line */}
             <div className="flex items-start gap-3 text-sm text-brown-700">
@@ -3468,7 +2246,7 @@ export default function HomePage() {
       </section>
 
       {/* Who We Help Section */}
-      <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-white">
+      <section id="therapy" className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-14">
             <h2 className="font-serif text-4xl sm:text-5xl font-medium text-stone-900 mb-6">
@@ -3571,43 +2349,43 @@ export default function HomePage() {
             </h2>
           </div>
 
-          <div className="space-y-6 mb-12">
+          <div className="space-y-8 mb-12">
             {[
               {
                 step: '1',
                 title: 'Free Intro Call (Optional)',
-                description: 'A brief 10–15 minute phone or video call to answer questions, discuss whether ketamine might be appropriate, and explain the process and pricing.',
+                description: 'A brief 10–15 minute phone or video call to answer your questions, review whether ketamine might be appropriate, and walk you through the process and pricing.',
               },
               {
                 step: '2',
                 title: 'Medical Evaluation',
-                description: 'You\'ll meet with the physician for a comprehensive assessment of your medical and mental health history, current medications, and treatment goals. Together, you\'ll decide if ketamine therapy is a good fit.',
+                description: "You'll meet one-on-one with the physician for a comprehensive review of your medical and mental health history, current medications, and goals. Together, you'll decide if ketamine therapy is a good fit.",
               },
               {
                 step: '3',
                 title: 'Infusion Series',
-                description: 'Most patients start with a short series of IV ketamine infusions over several weeks. Treatments take about 60–90 minutes in a private room with continuous monitoring and a registered nurse (RN) present.',
+                description: 'Most patients begin with a short series of IV ketamine infusions over several weeks. Each treatment lasts about 60–90 minutes in a private room with continuous monitoring and a registered nurse (RN) present.',
               },
               {
                 step: '4',
                 title: 'Integration & Follow-Up',
-                description: 'After each session, we review how you\'re feeling, track symptoms over time, and coordinate with your other providers. Some patients benefit from occasional "maintenance" infusions after the initial series.',
+                description: "After each session, we review how you're feeling, track changes in your symptoms over time, and adjust your plan as needed. When possible, we coordinate with your therapist, psychiatrist, or primary care clinician.",
               },
               {
                 step: '5',
                 title: 'Ongoing Support',
-                description: 'We\'ll help you build a plan that includes therapy, lifestyle changes, and other supports so ketamine isn\'t a one-off event but part of a comprehensive wellness strategy.',
+                description: "If ketamine is helpful for you, we'll discuss options for occasional maintenance infusions and pair them with therapy, lifestyle changes, and other supports so treatment becomes part of a long-term wellness strategy—not a one-off event.",
               },
             ].map((item) => (
-              <div key={item.step} className="flex gap-6 items-start">
+              <div key={item.step} className="flex gap-6 items-center">
                 <div className="flex-shrink-0">
-                  <div className="w-14 h-14 rounded-full bg-clay-300 text-white flex items-center justify-center font-medium text-xl shadow-soft">
+                  <div className="w-14 h-14 lg:w-16 lg:h-16 rounded-full bg-gradient-to-br from-clay-500 to-terracotta-400 text-white flex items-center justify-center font-semibold text-xl lg:text-2xl shadow-soft-md ring-4 ring-sand-100/50">
                     {item.step}
                   </div>
                 </div>
                 <div className="flex-1 bg-sand-50 rounded-2xl p-6 lg:p-8 border border-sand-200 shadow-soft">
-                  <h3 className="text-xl font-medium text-stone-900 mb-3">{item.title}</h3>
-                  <p className="text-brown-700 leading-relaxed font-light">{item.description}</p>
+                  <h3 className="text-base lg:text-lg font-semibold text-stone-900 mb-3">{item.title}</h3>
+                  <p className="text-sm lg:text-base text-stone-700 leading-relaxed font-light">{item.description}</p>
                 </div>
               </div>
             ))}
@@ -3615,8 +2393,8 @@ export default function HomePage() {
 
           <div className="text-center">
             <a
-              href="#waitlist"
-              className="btn-primary inline-block"
+              href="#contact"
+              className="btn-primary inline-flex items-center justify-center mt-10"
             >
               Get Started — Join the Waitlist
             </a>
@@ -3658,7 +2436,7 @@ export default function HomePage() {
       </section>
 
       {/* Pricing Overview Section */}
-      <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-white">
+      <section id="pricing" className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-14">
             <h2 className="font-serif text-4xl sm:text-5xl font-medium text-stone-900 mb-4">
@@ -3687,21 +2465,13 @@ export default function HomePage() {
                 ))}
               </div>
 
-              <div className="text-center">
-                <Link
-                  href="/pricing"
-                  className="btn-primary inline-block"
-                >
-                  Request Full Pricing & Availability
-                </Link>
-              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* About Physician Section */}
-      <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-sand-50">
+      <section id="about" className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-sand-50">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-14">
             <h2 className="font-serif text-4xl sm:text-5xl font-medium text-stone-900 mb-4">
@@ -3733,21 +2503,13 @@ export default function HomePage() {
                 ))}
               </ul>
 
-              <div className="text-center">
-                <Link
-                  href="/about"
-                  className="inline-block text-terracotta-400 hover:text-brown-700 font-medium transition-colors"
-                >
-                  Learn more about our approach →
-                </Link>
-              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* FAQ Preview Section */}
-      <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-white">
+      <section id="faq" className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-14">
             <h2 className="font-serif text-4xl sm:text-5xl font-medium text-stone-900 mb-4">
@@ -3781,19 +2543,11 @@ export default function HomePage() {
             ))}
           </div>
 
-          <div className="text-center">
-            <Link
-              href="/faq"
-              className="inline-block text-terracotta-400 hover:text-brown-700 font-medium text-lg transition-colors"
-            >
-              View full FAQ →
-            </Link>
-          </div>
         </div>
       </section>
 
       {/* Final Waitlist CTA Section */}
-      <section id="waitlist" className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-clay-300 text-white relative overflow-hidden">
+      <section id="contact" className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-clay-300 text-white relative overflow-hidden">
         {/* Background Image */}
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40"
@@ -3802,22 +2556,18 @@ export default function HomePage() {
         {/* Overlay for better text readability */}
         <div className="absolute inset-0 bg-gradient-to-b from-clay-300/70 via-clay-300/80 to-clay-300/90"></div>
         
-        <div className="max-w-5xl mx-auto relative">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Copy Side */}
-            <div>
-              <h2 className="font-serif text-4xl sm:text-5xl font-medium mb-6 drop-shadow-lg">
-                Be the First to Know When Haven Opens
-              </h2>
-              <p className="text-lg text-white leading-relaxed font-light drop-shadow-md">
-                We're finalizing our space in Newport Beach and will be opening our doors soon. If you'd like early access to appointments, opening-week pricing, or a quick call with the physician to see if ketamine therapy makes sense for you, join the waitlist below.
-              </p>
-            </div>
+        <div className="max-w-2xl mx-auto relative text-center">
+          {/* Heading */}
+          <h2 className="font-serif text-4xl sm:text-5xl font-medium mb-6 drop-shadow-lg">
+            Join the Waitlist
+          </h2>
+          <p className="text-lg text-white leading-relaxed font-light drop-shadow-md mb-10">
+            Be the first to know when Haven opens in Newport Beach.
+          </p>
 
-            {/* Form Side */}
-            <div className="bg-white rounded-3xl p-8 lg:p-10 shadow-soft-lg">
-              <WaitlistForm />
-            </div>
+          {/* Form */}
+          <div className="bg-white rounded-3xl p-8 lg:p-10 shadow-soft-lg">
+            <WaitlistForm />
           </div>
         </div>
 

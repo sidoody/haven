@@ -51,7 +51,7 @@ export default function Header() {
           {/* Logo */}
           <button 
             onClick={scrollToTop}
-            className="font-serif font-medium text-xl text-stone-900 tracking-wide cursor-pointer"
+            className="font-serif font-medium text-xl text-stone-900 tracking-wide cursor-pointer hover:opacity-80 transition-opacity"
           >
             Haven
           </button>
@@ -84,13 +84,7 @@ export default function Header() {
             </button>
             <button 
               onClick={() => scrollToSection('contact')}
-              className="text-brown-700 hover:text-stone-900 transition-colors font-light cursor-pointer"
-            >
-              Contact
-            </button>
-            <button 
-              onClick={() => scrollToSection('contact')}
-              className="bg-clay-300 hover:bg-terracotta-400 text-white px-6 py-2.5 rounded-full font-medium transition-all duration-200 shadow-soft hover:shadow-soft-md hover:-translate-y-0.5"
+              className="bg-clay-300 hover:bg-terracotta-400 text-white px-6 py-2.5 rounded-full font-medium transition-all duration-200 shadow-soft hover:shadow-soft-md hover:-translate-y-0.5 cursor-pointer"
             >
               Join Waitlist
             </button>
@@ -144,13 +138,7 @@ export default function Header() {
             </button>
             <button 
               onClick={() => scrollToSection('contact')}
-              className="block w-full text-left text-brown-700 hover:text-stone-900 py-2 font-light"
-            >
-              Contact
-            </button>
-            <button 
-              onClick={() => scrollToSection('contact')}
-              className="block bg-clay-300 hover:bg-terracotta-400 text-white px-6 py-2.5 rounded-full font-medium text-center transition-all duration-200 w-full"
+              className="block bg-clay-300 hover:bg-terracotta-400 text-white px-6 py-2.5 rounded-full font-medium text-center transition-all duration-200 w-full cursor-pointer"
             >
               Join Waitlist
             </button>

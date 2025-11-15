@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import WaitlistForm from './components/WaitlistForm';
+import HeroEmailSignup from './components/HeroEmailSignup';
 
 export default function HomePage() {
   return (
@@ -85,20 +86,7 @@ export default function HomePage() {
             </p>
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-4 mb-8">
-              <a
-                href="#contact"
-                className="btn-primary inline-block text-center"
-              >
-                Join the Waitlist
-              </a>
-              <a
-                href="#intro-call"
-                className="btn-secondary inline-block text-center"
-              >
-                Free 10-Minute Call
-              </a>
-            </div>
+            <HeroEmailSignup />
 
             {/* Trust Line */}
             <div className="flex items-start gap-3 text-sm text-brown-700">
@@ -429,22 +417,18 @@ export default function HomePage() {
         {/* Overlay for better text readability */}
         <div className="absolute inset-0 bg-gradient-to-b from-clay-300/70 via-clay-300/80 to-clay-300/90"></div>
         
-        <div className="max-w-5xl mx-auto relative">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Copy Side */}
-            <div>
-              <h2 className="font-serif text-4xl sm:text-5xl font-medium mb-6 drop-shadow-lg">
-                Be the First to Know When Haven Opens
-              </h2>
-              <p className="text-lg text-white leading-relaxed font-light drop-shadow-md">
-                We're finalizing our space in Newport Beach and will be opening our doors soon. If you'd like early access to appointments, opening-week pricing, or a quick call with the physician to see if ketamine therapy makes sense for you, join the waitlist below.
-              </p>
-            </div>
+        <div className="max-w-2xl mx-auto relative text-center">
+          {/* Heading */}
+          <h2 className="font-serif text-4xl sm:text-5xl font-medium mb-6 drop-shadow-lg">
+            Join the Waitlist
+          </h2>
+          <p className="text-lg text-white leading-relaxed font-light drop-shadow-md mb-10">
+            Be the first to know when Haven opens in Newport Beach.
+          </p>
 
-            {/* Form Side */}
-            <div className="bg-white rounded-3xl p-8 lg:p-10 shadow-soft-lg">
-              <WaitlistForm />
-            </div>
+          {/* Form */}
+          <div className="bg-white rounded-3xl p-8 lg:p-10 shadow-soft-lg">
+            <WaitlistForm />
           </div>
         </div>
 
