@@ -317,7 +317,6 @@ export default function HomePage() {
                   { item: 'Single ketamine infusion', price: '$750' },
                   { item: '6-infusion series (recommended)', price: '$3,900' },
                   { item: 'Maintenance infusions', price: '$595' },
-                  { item: 'Optional NAD+ therapy', price: 'from $395' },
                 ].map((pricing) => (
                   <div key={pricing.item} className="flex justify-between items-center py-4 border-b border-sand-200 last:border-0">
                     <span className="text-stone-900 font-light">{pricing.item}</span>
@@ -340,30 +339,46 @@ export default function HomePage() {
             </h2>
           </div>
 
-          <div className="max-w-3xl mx-auto">
-            <div className="bg-white rounded-3xl p-8 lg:p-12 border border-sand-200 shadow-soft-md">
-              <p className="text-brown-700 text-lg mb-6 leading-relaxed font-light">
-                Haven Ketamine is led by <strong className="font-medium">Dr. Saud Siddiqui</strong>, a board-certified emergency medicine physician with extensive experience caring for patients in high-acuity settings and safely using ketamine for procedural sedation. He completed his medical training at UC Irvine and The George Washington University Hospital, a busy Level I trauma center in Washington, D.C., before practicing emergency medicine in Los Angeles.
-              </p>
-              <p className="text-brown-700 text-lg mb-10 leading-relaxed font-light">
-                After years in acute care and medical education, Dr. Siddiqui saw how many people continued to struggle despite traditional treatments. He created Haven as a calm, physician-led space where patients can access evidence-based ketamine therapy with hospital-level safety and a boutique, private experience. Education is central to his approach—every patient receives clear guidance, thoughtful conversation, and personalized care.
-              </p>
+          <div className="bg-white rounded-3xl p-8 lg:p-12 border border-sand-200 shadow-soft-md">
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+              {/* Doctor's Photo Column */}
+              <div className="flex flex-col items-center lg:items-start">
+                <div className="relative w-full max-w-sm aspect-square mb-6">
+                  <img
+                    src="/images/drsiddiqui.jpg"
+                    alt="Dr. Saud Siddiqui"
+                    className="w-full h-full object-cover rounded-2xl shadow-soft-md"
+                  />
+                </div>
+                <div className="w-full">
+                  <p className="font-medium text-stone-900 text-xl mb-6 text-center lg:text-left">Saud Siddiqui, M.D.</p>
+                  
+                  <ul className="space-y-3">
+                    {[
+                      'Board-certified in Emergency Medicine (ABEM)',
+                      'Fully licensed physician in California',
+                      'Background in acute care, procedural sedation, and medical education',
+                    ].map((credential) => (
+                      <li key={credential} className="flex items-start gap-3">
+                        <svg className="w-5 h-5 text-clay-300 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                        </svg>
+                        <span className="text-stone-900 font-light text-sm">{credential}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
 
-              <ul className="space-y-4 mb-10">
-                {[
-                  'Board-certified in Emergency Medicine (ABEM)',
-                  'Fully licensed physician in California',
-                  'Background in acute care, procedural sedation, and medical education',
-                ].map((credential) => (
-                  <li key={credential} className="flex items-start gap-3">
-                    <svg className="w-5 h-5 text-clay-300 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                    <span className="text-stone-900 font-light">{credential}</span>
-                  </li>
-                ))}
-              </ul>
-
+              {/* Text Content Column */}
+              <div>
+                <p className="text-brown-700 text-lg mb-6 leading-relaxed font-light">
+                  Haven Ketamine is led by <strong className="font-medium">Dr. Saud Siddiqui</strong>, a board-certified emergency medicine physician with extensive experience caring for patients in high-acuity settings and safely using ketamine for procedural sedation. He completed his medical training at UC Irvine and The George Washington University Hospital, a busy Level I trauma center in Washington, D.C., before practicing emergency medicine in Los Angeles.
+                </p>
+                <p className="text-brown-700 text-lg leading-relaxed font-light">
+                  After years in acute care and medical education, Dr. Siddiqui saw how many people continued to struggle despite traditional treatments. He created Haven as a calm, physician-led space where patients can access evidence-based ketamine therapy with hospital-level safety and a boutique, private experience. Education is central to his approach—every patient receives clear guidance, thoughtful conversation, and personalized care.
+                </p>
+              </div>
             </div>
           </div>
         </div>
