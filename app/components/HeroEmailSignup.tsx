@@ -1,77 +1,43 @@
 'use client';
 
-import { FormEvent, useState } from 'react';
-import { addToWaitlist } from '@/lib/supabase';
+import { useState } from 'react';
+import { joinWaitlist } from '@/app/actions/waitlist';
 
 export default function HeroEmailSignup() {
-  const [email, setEmail] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  async function handleSubmit(formData: FormData) {
+    setStatus('loading');
+    formData.append('name', 'Quick Signup');
+    formData.append('source', 'hero');
     
-    if (!email) {
-      const element = document.getElementById('contact');
-      if (element) {
-        const headerOffset = 80;
-        const elementPosition = element.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-      }
-      return;
-    }
-
-    setIsSubmitting(true);
-    setSubmitStatus('idle');
-
-    try {
-      await addToWaitlist({
-        name: 'Quick Signup',
-        email,
-        source: 'hero_email_signup',
-      });
-      setSubmitStatus('success');
-      setEmail('');
-    } catch (error) {
-      console.error('Error submitting hero form:', error);
-      console.error('Error details:', { type: typeof error, keys: error ? Object.keys(error) : 'null' });
-      setSubmitStatus('error');
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+    const result = await joinWaitlist(formData);
+    setStatus(result.success ? 'success' : 'error');
+  }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-3">
+    <form action={handleSubmit} className="space-y-3 mb-8">
       <div className="flex flex-col sm:flex-row gap-3 max-w-xl">
         <input
           type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Enter your email"
+          name="email"
           required
+          placeholder="Enter your email"
           className="flex-1 px-5 py-3.5 rounded-full border border-sand-300 bg-white/90 backdrop-blur-sm focus:ring-2 focus:ring-clay-300 focus:border-clay-300 outline-none transition font-light text-stone-900 placeholder:text-brown-700/50 shadow-soft"
         />
         <button
           type="submit"
-          disabled={isSubmitting}
-          className="btn-primary whitespace-nowrap cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+          disabled={status === 'loading'}
+          className="btn-primary whitespace-nowrap cursor-pointer disabled:opacity-50"
         >
-          {isSubmitting ? 'Joining...' : 'Join Waitlist'}
+          {status === 'loading' ? 'Joining...' : 'Join Waitlist'}
         </button>
       </div>
-      
-      {submitStatus === 'success' && (
-        <p className="text-sm text-green-700 font-light">
-          ✓ Success! Check your email for confirmation.
-        </p>
+      {status === 'success' && (
+        <p className="text-sm text-green-700">✓ Success! We'll be in touch.</p>
       )}
-      
-      {submitStatus === 'error' && (
-        <p className="text-sm text-red-700 font-light">
-          Something went wrong. Please try again or use the form below.
-        </p>
+      {status === 'error' && (
+        <p className="text-sm text-red-700">Error. Please try the form below.</p>
       )}
     </form>
   );

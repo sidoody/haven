@@ -53,6 +53,8 @@ app/
   globals.css
   layout.tsx
   page.tsx
+lib/
+  supabase.ts
 public/
   file.svg
   globe.svg
@@ -77,31 +79,80 @@ This section contains the contents of the repository's files.
 <file path="app/components/HeroEmailSignup.tsx">
 'use client';
 
+import { FormEvent, useState } from 'react';
+import { addToWaitlist } from '@/lib/supabase';
+
 export default function HeroEmailSignup() {
-  const scrollToContact = () => {
-    const element = document.getElementById('contact');
-    if (element) {
-      const headerOffset = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+  const [email, setEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    
+    if (!email) {
+      const element = document.getElementById('contact');
+      if (element) {
+        const headerOffset = 80;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+      }
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    try {
+      await addToWaitlist({
+        name: 'Quick Signup',
+        email,
+        source: 'hero_email_signup',
+      });
+      setSubmitStatus('success');
+      setEmail('');
+    } catch (error) {
+      console.error('Error submitting hero form:', error);
+      console.error('Error details:', { type: typeof error, keys: error ? Object.keys(error) : 'null' });
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
-    <div className="flex flex-col sm:flex-row gap-3 mb-8 max-w-xl">
-      <input
-        type="email"
-        placeholder="Enter your email"
-        className="flex-1 px-5 py-3.5 rounded-full border border-sand-300 bg-white/90 backdrop-blur-sm focus:ring-2 focus:ring-clay-300 focus:border-clay-300 outline-none transition font-light text-stone-900 placeholder:text-brown-700/50 shadow-soft"
-      />
-      <button
-        onClick={scrollToContact}
-        className="btn-primary whitespace-nowrap cursor-pointer"
-      >
-        Join Waitlist
-      </button>
-    </div>
+    <form onSubmit={handleSubmit} className="space-y-3">
+      <div className="flex flex-col sm:flex-row gap-3 max-w-xl">
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Enter your email"
+          required
+          className="flex-1 px-5 py-3.5 rounded-full border border-sand-300 bg-white/90 backdrop-blur-sm focus:ring-2 focus:ring-clay-300 focus:border-clay-300 outline-none transition font-light text-stone-900 placeholder:text-brown-700/50 shadow-soft"
+        />
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="btn-primary whitespace-nowrap cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          {isSubmitting ? 'Joining...' : 'Join Waitlist'}
+        </button>
+      </div>
+      
+      {submitStatus === 'success' && (
+        <p className="text-sm text-green-700 font-light">
+          ✓ Success! Check your email for confirmation.
+        </p>
+      )}
+      
+      {submitStatus === 'error' && (
+        <p className="text-sm text-red-700 font-light">
+          Something went wrong. Please try again or use the form below.
+        </p>
+      )}
+    </form>
   );
 }
 </file>
@@ -297,6 +348,57 @@ export default function TermsPage() {
       </section>
     </>
   );
+}
+</file>
+
+<file path="lib/supabase.ts">
+import { createClient } from '@supabase/supabase-js';
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+if (!supabaseUrl || !supabaseAnonKey) {
+  console.error('Missing Supabase environment variables:', {
+    hasUrl: !!supabaseUrl,
+    hasKey: !!supabaseAnonKey
+  });
+}
+
+export const supabase = createClient(
+  supabaseUrl || '',
+  supabaseAnonKey || ''
+);
+
+export type WaitlistSignup = {
+  name: string;
+  email: string;
+  phone?: string;
+  reason?: string;
+  source?: string;
+};
+
+export async function addToWaitlist(data: WaitlistSignup) {
+  // Check if Supabase is configured
+  if (!supabaseUrl || !supabaseAnonKey) {
+    throw new Error('Supabase is not configured. Please check your environment variables.');
+  }
+
+  const { data: result, error } = await supabase
+    .from('waitlist_signups')
+    .insert([data])
+    .select();
+
+  if (error) {
+    console.error('Supabase error details:', {
+      message: error.message,
+      details: error.details,
+      hint: error.hint,
+      code: error.code
+    });
+    throw new Error(error.message || 'Failed to add to waitlist');
+  }
+
+  return result;
 }
 </file>
 
@@ -969,36 +1071,6 @@ const nextConfig: NextConfig = {
 export default nextConfig;
 </file>
 
-<file path="package.json">
-{
-  "name": "haven-ketamine-land",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
-  },
-  "dependencies": {
-    "@supabase/supabase-js": "^2.81.1",
-    "next": "16.0.3",
-    "react": "19.2.0",
-    "react-dom": "19.2.0"
-  },
-  "devDependencies": {
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "16.0.3",
-    "tailwindcss": "^4",
-    "typescript": "^5"
-  }
-}
-</file>
-
 <file path="postcss.config.mjs">
 const config = {
   plugins: {
@@ -1414,43 +1486,33 @@ Once launched, monitor:
 }
 </file>
 
-<file path="app/components/WaitlistForm.tsx">
-'use client';
-
-import { FormEvent } from 'react';
-
-export default function WaitlistForm() {
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    // TODO: Integrate with backend service (Formspree, API route, etc.)
-    console.log('Form submitted - TODO: implement backend integration');
-  };
-
-  return (
-    <form onSubmit={handleSubmit} className="space-y-5">
-      <div>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          required
-          className="w-full px-5 py-3.5 rounded-2xl border border-sand-300 bg-sand-50 focus:ring-2 focus:ring-clay-300 focus:border-clay-300 outline-none transition font-light text-stone-900 placeholder:text-brown-700/40"
-          placeholder="Enter your email"
-        />
-      </div>
-
-      <button
-        type="submit"
-        className="w-full bg-terracotta-400 hover:bg-brown-700 text-white font-medium py-4 px-6 rounded-full transition-all duration-200 shadow-soft hover:shadow-soft-md hover:-translate-y-0.5 cursor-pointer"
-      >
-        Join Waitlist
-      </button>
-
-      <p className="text-xs text-brown-700/70 text-center font-light">
-        We'll only contact you about opening dates and scheduling options.
-      </p>
-    </form>
-  );
+<file path="package.json">
+{
+  "name": "haven-ketamine-land",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.81.1",
+    "next": "16.0.3",
+    "react": "19.2.0",
+    "react-dom": "19.2.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.0.3",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
 }
 </file>
 
@@ -1741,6 +1803,205 @@ export default function Footer() {
 }
 </file>
 
+<file path="app/components/WaitlistForm.tsx">
+'use client';
+
+import { FormEvent, useState } from 'react';
+import { addToWaitlist } from '@/lib/supabase';
+
+export default function WaitlistForm() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+    setErrorMessage('');
+
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      name: formData.get('name') as string,
+      email: formData.get('email') as string,
+      phone: formData.get('phone') as string || undefined,
+      reason: formData.get('reason') as string || undefined,
+      source: 'website_waitlist_form',
+    };
+
+    try {
+      await addToWaitlist(data);
+      setSubmitStatus('success');
+      (e.target as HTMLFormElement).reset();
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      console.error('Error type:', typeof error);
+      console.error('Error keys:', error ? Object.keys(error) : 'null');
+      setSubmitStatus('error');
+      
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+      } else if (error && typeof error === 'object' && 'message' in error) {
+        setErrorMessage(String(error.message));
+      } else {
+        setErrorMessage('Failed to join waitlist. Please check your connection and try again.');
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-5">
+      <div>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          required
+          className="w-full px-5 py-3.5 rounded-2xl border border-sand-300 bg-sand-50 focus:ring-2 focus:ring-clay-300 focus:border-clay-300 outline-none transition font-light text-stone-900 placeholder:text-brown-700/40"
+          placeholder="Your name"
+        />
+      </div>
+
+      <div>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          required
+          className="w-full px-5 py-3.5 rounded-2xl border border-sand-300 bg-sand-50 focus:ring-2 focus:ring-clay-300 focus:border-clay-300 outline-none transition font-light text-stone-900 placeholder:text-brown-700/40"
+          placeholder="Your email"
+        />
+      </div>
+
+      <div>
+        <input
+          type="tel"
+          id="phone"
+          name="phone"
+          className="w-full px-5 py-3.5 rounded-2xl border border-sand-300 bg-sand-50 focus:ring-2 focus:ring-clay-300 focus:border-clay-300 outline-none transition font-light text-stone-900 placeholder:text-brown-700/40"
+          placeholder="Phone number (optional)"
+        />
+      </div>
+
+      <div>
+        <textarea
+          id="reason"
+          name="reason"
+          rows={3}
+          className="w-full px-5 py-3.5 rounded-2xl border border-sand-300 bg-sand-50 focus:ring-2 focus:ring-clay-300 focus:border-clay-300 outline-none transition font-light text-stone-900 placeholder:text-brown-700/40 resize-none"
+          placeholder="What brings you to Haven? (optional)"
+        />
+      </div>
+
+      <button
+        type="submit"
+        disabled={isSubmitting}
+        className="w-full bg-terracotta-400 hover:bg-brown-700 text-white font-medium py-4 px-6 rounded-full transition-all duration-200 shadow-soft hover:shadow-soft-md hover:-translate-y-0.5 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0"
+      >
+        {isSubmitting ? 'Joining...' : 'Join Waitlist'}
+      </button>
+
+      {submitStatus === 'success' && (
+        <div className="p-4 rounded-2xl bg-green-50 border border-green-200">
+          <p className="text-sm text-green-800 text-center font-light">
+            🎉 Thank you! You've been added to our waitlist. We'll be in touch soon.
+          </p>
+        </div>
+      )}
+
+      {submitStatus === 'error' && (
+        <div className="p-4 rounded-2xl bg-red-50 border border-red-200">
+          <p className="text-sm text-red-800 text-center font-light">
+            {errorMessage}
+          </p>
+        </div>
+      )}
+
+      <p className="text-xs text-brown-700/70 text-center font-light">
+        We'll only contact you about opening dates and scheduling options.
+      </p>
+    </form>
+  );
+}
+</file>
+
+<file path="app/layout.tsx">
+import type { Metadata } from "next";
+import { Inter, Playfair_Display } from "next/font/google";
+import "./globals.css";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+  display: 'swap',
+});
+
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: 'swap',
+});
+
+export const metadata: Metadata = {
+  metadataBase: new URL('https://havenketamine.com'),
+  title: "Haven Ketamine | Physician-Led Ketamine Therapy in Newport Beach, CA",
+  description: "Haven Ketamine is a physician-led clinic in Newport Beach providing safe, evidence-based ketamine infusions for depression, anxiety, PTSD, and chronic stress. Join the waitlist for our opening.",
+  keywords: [
+    "ketamine therapy Newport Beach",
+    "ketamine clinic Newport Beach CA",
+    "IV ketamine infusion Newport Beach",
+    "ketamine treatment for depression Newport Beach",
+    "ketamine therapy anxiety PTSD Orange County",
+    "physician-led ketamine therapy",
+    "ketamine infusion Newport Beach"
+  ],
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://havenketamine.com",
+    siteName: "Haven Ketamine",
+    title: "Haven Ketamine | Physician-Led Ketamine Therapy in Newport Beach, CA",
+    description: "Haven Ketamine is a physician-led clinic in Newport Beach providing safe, evidence-based ketamine infusions for depression, anxiety, PTSD, and chronic stress. Join the waitlist for our opening.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Haven Ketamine | Physician-Led Ketamine Therapy in Newport Beach, CA",
+    description: "Physician-led ketamine therapy for depression, anxiety, PTSD, and chronic stress in Newport Beach, CA.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  verification: {
+    // TODO: Add Google Search Console verification code
+  },
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <body
+        className={`${inter.variable} ${playfair.variable} bg-sand-50 text-stone-900 antialiased`}
+      >
+        <Header />
+        <main>{children}</main>
+        <Footer />
+      </body>
+    </html>
+  );
+}
+</file>
+
 <file path="app/components/Header.tsx">
 'use client';
 
@@ -1890,81 +2151,6 @@ export default function Header() {
         )}
       </nav>
     </header>
-  );
-}
-</file>
-
-<file path="app/layout.tsx">
-import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
-import "./globals.css";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-  display: 'swap',
-});
-
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  display: 'swap',
-});
-
-export const metadata: Metadata = {
-  metadataBase: new URL('https://havenketamine.com'),
-  title: "Haven Ketamine | Physician-Led Ketamine Therapy in Newport Beach, CA",
-  description: "Haven Ketamine is a physician-led clinic in Newport Beach providing safe, evidence-based ketamine infusions for depression, anxiety, PTSD, and chronic stress. Join the waitlist for our opening.",
-  keywords: [
-    "ketamine therapy Newport Beach",
-    "ketamine clinic Newport Beach CA",
-    "IV ketamine infusion Newport Beach",
-    "ketamine treatment for depression Newport Beach",
-    "ketamine therapy anxiety PTSD Orange County",
-    "physician-led ketamine therapy",
-    "ketamine infusion Newport Beach"
-  ],
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: "https://havenketamine.com",
-    siteName: "Haven Ketamine",
-    title: "Haven Ketamine | Physician-Led Ketamine Therapy in Newport Beach, CA",
-    description: "Haven Ketamine is a physician-led clinic in Newport Beach providing safe, evidence-based ketamine infusions for depression, anxiety, PTSD, and chronic stress. Join the waitlist for our opening.",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Haven Ketamine | Physician-Led Ketamine Therapy in Newport Beach, CA",
-    description: "Physician-led ketamine therapy for depression, anxiety, PTSD, and chronic stress in Newport Beach, CA.",
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-  verification: {
-    // TODO: Add Google Search Console verification code
-  },
-};
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html lang="en">
-      <body
-        className={`${inter.variable} ${playfair.variable} bg-sand-50 text-stone-900 antialiased`}
-      >
-        <Header />
-        <main>{children}</main>
-        <Footer />
-      </body>
-    </html>
   );
 }
 </file>
